@@ -1,5 +1,5 @@
 import { ChainId } from '@uniswap/sdk' // TokenAmount
-import React, { useState } from 'react'
+import React from 'react' // useState
 import { Text } from 'rebass'
 import { NavLink } from 'react-router-dom'
 import { darken } from 'polished'
@@ -7,10 +7,9 @@ import { useTranslation } from 'react-i18next'
 
 import styled from 'styled-components'
 
-import Logo from '../../assets/svg/logo.svg'
-import LogoDark from '../../assets/svg/logo_white.svg'
+import Logo from '../../assets/svg/logo_pink.svg'
 import { useActiveWeb3React } from '../../hooks'
-import { useDarkModeManager } from '../../state/user/hooks'
+// import { useDarkModeManager } from '../../state/user/hooks'
 import { useETHBalances } from '../../state/wallet/hooks' // useAggregateUniBalance
 // import { CardNoise } from '../earn/styled'
 // import { CountUp } from 'use-count-up'
@@ -27,8 +26,8 @@ import ClaimModal from '../claim/ClaimModal'
 // import { useUserHasAvailableClaim } from '../../state/claim/hooks'
 // import { useUserHasSubmittedClaim } from '../../state/transactions/hooks'
 // import { Dots } from '../swap/styleds'
-import Modal from '../Modal'
-import UniBalanceContent from './UniBalanceContent'
+// import Modal from '../Modal'
+// import UniBalanceContent from './UniBalanceContent'
 // import usePrevious from '../../hooks/usePrevious'
 
 const HeaderFrame = styled.div`
@@ -190,7 +189,7 @@ const Title = styled.a`
 const UniIcon = styled.div`
   transition: transform 0.3s ease;
   :hover {
-    transform: translateY(0.4em);
+    transform: translateY(0.2em);
   }
 `
 
@@ -210,6 +209,7 @@ const StyledNavLink = styled(NavLink).attrs({
   width: fit-content;
   margin: 0 12px;
   font-weight: 500;
+  transition: transform 0.3s ease;
 
   &.${activeClassName} {
     border-radius: 12px;
@@ -217,7 +217,10 @@ const StyledNavLink = styled(NavLink).attrs({
     color: ${({ theme }) => theme.text1};
   }
 
-  :hover,
+  :hover {
+    transform: translateY(0.2em);
+    color: ${({ theme }) => darken(0.1, theme.text1)};
+  }
   :focus {
     color: ${({ theme }) => darken(0.1, theme.text1)};
   }
@@ -266,7 +269,7 @@ export default function Header() {
   const { t } = useTranslation()
 
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
-  const [isDark] = useDarkModeManager()
+  // const [isDark] = useDarkModeManager()
 
   // const toggleClaimModal = useToggleSelfClaimModal()
 
@@ -276,7 +279,7 @@ export default function Header() {
 
   // const aggregateBalance: TokenAmount | undefined = useAggregateUniBalance()
 
-  const [showUniBalanceModal, setShowUniBalanceModal] = useState(false)
+  // const [showUniBalanceModal, setShowUniBalanceModal] = useState(false)
   // const showClaimPopup = useShowClaimPopup()
 
   // const countUpValue = aggregateBalance?.toFixed(0) ?? '0'
@@ -285,13 +288,13 @@ export default function Header() {
   return (
     <HeaderFrame>
       <ClaimModal />
-      <Modal isOpen={showUniBalanceModal} onDismiss={() => setShowUniBalanceModal(false)}>
+      {/* <Modal isOpen={showUniBalanceModal} onDismiss={() => setShowUniBalanceModal(false)}>
         <UniBalanceContent setShowUniBalanceModal={setShowUniBalanceModal} />
-      </Modal>
+      </Modal> */}
       <HeaderRow>
         <Title href=".">
           <UniIcon>
-            <img width={'80px'} src={isDark ? LogoDark : Logo} alt="logo" />
+            <img width={'80px'} src={Logo} alt="logo" />
           </UniIcon>
         </Title>
         <HeaderLinks>

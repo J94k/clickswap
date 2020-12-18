@@ -49,7 +49,7 @@ const BodyWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding-top: 100px;
+  padding-top: 140px;
   align-items: center;
   flex: 1;
   overflow-y: auto;
@@ -58,7 +58,7 @@ const BodyWrapper = styled.div`
 
   ${({ theme }) => theme.mediaWidth.upToSmall`
     padding: 16px;
-    padding-top: 2rem;
+    padding-top: 8rem;
   `};
 
   z-index: 1;
