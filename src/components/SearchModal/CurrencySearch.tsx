@@ -8,13 +8,13 @@ import { ThemeContext } from 'styled-components'
 import { useActiveWeb3React } from '../../hooks'
 import { useAllTokens, useToken } from '../../hooks/Tokens'
 import { useSelectedListInfo } from '../../state/lists/hooks'
-import { CloseIcon, LinkStyledButton, TYPE } from '../../theme'
+import { CloseIcon, LinkStyledButton } from '../../theme' // TYPE
 import { isAddress } from '../../utils'
 import Card from '../Card'
 import Column from '../Column'
-import ListLogo from '../ListLogo'
+// import ListLogo from '../ListLogo'
 import QuestionHelper from '../QuestionHelper'
-import Row, { RowBetween } from '../Row'
+import { RowBetween } from '../Row' // Row
 import CommonBases from './CommonBases'
 import CurrencyList from './CurrencyList'
 import { filterTokens } from './filtering'
@@ -188,7 +188,7 @@ export function CurrencySearch({
       <Separator />
       <Card>
         <RowBetween>
-          {selectedListInfo.current ? (
+          {/* {selectedListInfo.current ? (
             <Row>
               {selectedListInfo.current.logoURI ? (
                 <ListLogo
@@ -199,7 +199,7 @@ export function CurrencySearch({
               ) : null}
               <TYPE.main id="currency-search-selected-list-name">{selectedListInfo.current.name}</TYPE.main>
             </Row>
-          ) : null}
+          ) : null} */}
           <LinkStyledButton
             style={{ fontWeight: 500, color: theme.text2, fontSize: 16 }}
             onClick={onChangeList}
