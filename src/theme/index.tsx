@@ -59,17 +59,17 @@ export function colors(darkMode: boolean): Colors {
     advancedBG: darkMode ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.6)',
 
     //primary colors
-    primary1: darkMode ? '#2172E5' : '#5b3ec5',
-    primary2: darkMode ? '#3680E7' : '#735fbd',
-    primary3: darkMode ? '#4D8FEA' : '#7567a7',
-    primary4: darkMode ? '#376bad70' : '#F6DDE8',
-    primary5: darkMode ? '#153d6f70' : '#FDEAF1',
+    primary1: darkMode ? '#655ece' : '#5b3ec5',
+    primary2: darkMode ? '#6d6bbe' : '#735fbd',
+    primary3: darkMode ? '#7173b3' : '#7567a7',
+    primary4: darkMode ? '#c8c9f3' : '#d8c9f3',
+    primary5: darkMode ? '#c7caee' : '#d7caee',
 
     // color text
-    primaryText1: darkMode ? '#6da8ff' : '#5b3ec5',
+    primaryText1: darkMode ? '#7173b3' : '#5b3ec5',
 
     // secondary colors
-    secondary1: darkMode ? '#2172E5' : '#5b3ec5',
+    secondary1: darkMode ? '#ac88f0' : '#5b3ec5',
     secondary2: darkMode ? '#17000b26' : '#F6DDE8',
     secondary3: darkMode ? '#17000b26' : '#FDEAF1',
 
@@ -80,10 +80,6 @@ export function colors(darkMode: boolean): Colors {
     yellow1: '#FFE270',
     yellow2: '#F3841E',
     blue1: '#2172E5'
-
-    // dont wanna forget these blue yet
-    // blue4: darkMode ? '#153d6f70' : '#C4D9F8',
-    // blue5: darkMode ? '#153d6f70' : '#EBF4FF',
   }
 }
 
