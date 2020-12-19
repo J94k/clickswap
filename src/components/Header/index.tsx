@@ -205,14 +205,13 @@ const StyledNavLink = styled(NavLink).attrs({
   cursor: pointer;
   text-decoration: none;
   color: ${({ theme }) => theme.text2};
-  font-size: 1rem;
+  font-size: 1.3rem;
   width: fit-content;
   margin: 0 12px;
   font-weight: 500;
   transition: transform 0.3s ease;
 
   &.${activeClassName} {
-    border-radius: 12px;
     font-weight: 600;
     color: ${({ theme }) => theme.text1};
   }

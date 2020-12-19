@@ -8,10 +8,12 @@ const BASE_FEE = new Percent(JSBI.BigInt(30), JSBI.BigInt(10000))
 const ONE_HUNDRED_PERCENT = new Percent(JSBI.BigInt(10000), JSBI.BigInt(10000))
 const INPUT_FRACTION_AFTER_FEE = ONE_HUNDRED_PERCENT.subtract(BASE_FEE)
 
+// todo => функция расчета, нужно заменить 0.3% на 0.25 провайдеру | 0.05 сервису
+
 // computes price breakdown for the trade
 export function computeTradePriceBreakdown(
   trade?: Trade
-): { priceImpactWithoutFee?: Percent; realizedLPFee?: CurrencyAmount } {
+): { priceImpactWithoutFee?: Percent; realizedLPFee?: CurrencyAmount; realizedProtocolFee?: CurrencyAmount } {
   // for each hop in our trade, take away the x*y=k price impact from 0.3% fees
   // e.g. for 3 tokens/2 hops: 1 - ((1 - .03) * (1-.03))
   const realizedLPFee = !trade
@@ -31,6 +33,8 @@ export function computeTradePriceBreakdown(
     ? new Percent(priceImpactWithoutFeeFraction?.numerator, priceImpactWithoutFeeFraction?.denominator)
     : undefined
 
+  const realizedProtocolFeeAmount = undefined
+
   // the amount of the input that accrues to LPs
   const realizedLPFeeAmount =
     realizedLPFee &&
@@ -39,7 +43,11 @@ export function computeTradePriceBreakdown(
       ? new TokenAmount(trade.inputAmount.token, realizedLPFee.multiply(trade.inputAmount.raw).quotient)
       : CurrencyAmount.ether(realizedLPFee.multiply(trade.inputAmount.raw).quotient))
 
-  return { priceImpactWithoutFee: priceImpactWithoutFeePercent, realizedLPFee: realizedLPFeeAmount }
+  return {
+    priceImpactWithoutFee: priceImpactWithoutFeePercent,
+    realizedProtocolFee: realizedProtocolFeeAmount,
+    realizedLPFee: realizedLPFeeAmount
+  }
 }
 
 // computes the minimum amount out and maximum amount in for a trade given a user specified allowed slippage in bips

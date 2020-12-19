@@ -37,7 +37,10 @@ export default function SwapModalFooter({
     allowedSlippage,
     trade
   ])
-  const { priceImpactWithoutFee, realizedLPFee } = useMemo(() => computeTradePriceBreakdown(trade), [trade])
+  const { priceImpactWithoutFee, realizedProtocolFee, realizedLPFee } = useMemo(
+    () => computeTradePriceBreakdown(trade),
+    [trade]
+  )
   const severity = warningSeverity(priceImpactWithoutFee)
 
   return (
@@ -86,6 +89,7 @@ export default function SwapModalFooter({
             </TYPE.black>
           </RowFixed>
         </RowBetween>
+
         <RowBetween>
           <RowFixed>
             <TYPE.black color={theme.text2} fontSize={14} fontWeight={400}>
@@ -95,12 +99,28 @@ export default function SwapModalFooter({
           </RowFixed>
           <FormattedPriceImpact priceImpact={priceImpactWithoutFee} />
         </RowBetween>
+
+        <RowBetween>
+          <RowFixed>
+            <TYPE.black fontSize={14} fontWeight={400} color={theme.text2}>
+              Protocol fee
+            </TYPE.black>
+            <QuestionHelper text="A protocol-wide charge of 0.05% per trade." />
+          </RowFixed>
+          <TYPE.black fontSize={14}>
+            {realizedProtocolFee
+              ? realizedProtocolFee?.toSignificant(6) + ' ' + trade.inputAmount.currency.symbol
+              : '-'}
+          </TYPE.black>
+        </RowBetween>
+
         <RowBetween>
           <RowFixed>
             <TYPE.black fontSize={14} fontWeight={400} color={theme.text2}>
               Liquidity Provider Fee
             </TYPE.black>
-            <QuestionHelper text="A portion of each trade (0.30%) goes to liquidity providers as a protocol incentive." />
+            {/* <QuestionHelper text="A portion of each trade (0.30%) goes to liquidity providers as a protocol incentive." /> */}
+            <QuestionHelper text="A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive." />
           </RowFixed>
           <TYPE.black fontSize={14}>
             {realizedLPFee ? realizedLPFee?.toSignificant(6) + ' ' + trade.inputAmount.currency.symbol : '-'}
