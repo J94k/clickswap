@@ -33,6 +33,7 @@ import { RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects' // Ope
 // import VotePage from './Vote/VotePage'
 
 const AppWrapper = styled.div`
+  min-width: 275px;
   display: flex;
   flex-flow: column;
   align-items: flex-start;
@@ -49,7 +50,7 @@ const BodyWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding-top: 140px;
+  padding-top: 160px;
   align-items: center;
   flex: 1;
   overflow-y: auto;
@@ -58,7 +59,7 @@ const BodyWrapper = styled.div`
 
   ${({ theme }) => theme.mediaWidth.upToSmall`
     padding: 16px;
-    padding-top: 8rem;
+    padding-top: 10.6rem;
   `};
 
   z-index: 1;

@@ -40,8 +40,7 @@ const HeaderFrame = styled.div`
   width: 100%;
   top: 0;
   position: relative;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 1rem;
+  padding: 1rem 3rem;
   z-index: 2;
   ${({ theme }) => theme.mediaWidth.upToMedium`
     grid-template-columns: 1fr;
@@ -69,12 +68,13 @@ const HeaderControls = styled.div`
     max-width: 960px;
     padding: 1rem;
     position: fixed;
-    bottom: 0px;
-    left: 0px;
-    width: 100%;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
     z-index: 99;
     height: 72px;
-    border-radius: 12px 12px 0 0;
+    border-radius: 18px;
     background-color: ${({ theme }) => theme.bg1};
   `};
 `
@@ -149,13 +149,13 @@ const AccountElement = styled.div<{ active: boolean }>`
 
 const HideSmall = styled.span`
   ${({ theme }) => theme.mediaWidth.upToSmall`
-    display: none;
+    display: none;  
   `};
 `
 
 const NetworkCard = styled(YellowCard)`
   border-radius: 12px;
-  padding: 8px 12px;
+  padding: 9px 14px;
   ${({ theme }) => theme.mediaWidth.upToSmall`
     margin: 0;
     margin-right: 0.5rem;
