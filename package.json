@@ -1,6 +1,6 @@
 {
-  "name": "click-swap",
-  "description": "ClickSwap",
+  "name": "clickswap",
+  "description": "ClickSwap Interface",
   "homepage": ".",
   "private": true,
   "devDependencies": {
