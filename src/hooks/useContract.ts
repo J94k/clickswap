@@ -22,6 +22,9 @@ import { MULTICALL_ABI, MULTICALL_NETWORKS } from '../constants/multicall'
 import { V1_EXCHANGE_ABI, V1_FACTORY_ABI, V1_FACTORY_ADDRESSES } from '../constants/v1'
 import { getContract } from '../utils'
 import { useActiveWeb3React } from './index'
+import { UNISWAP_V2_HELPER_ABI, UNISWAP_V2_HELPER_ADDRESS } from '../constants/abis/uniswap-v2-helper'
+import { UNISWAP_V2_PAIR } from '../constants/abis/uniswap-v2-pair'
+import { UNISWAP_V2_FACTORY_ABI, UNISWAP_V2_FACTORY_ADDRESS } from '../constants/abis/uniswap-v2-factory'
 
 // returns null on errors
 function useContract(address: string | undefined, ABI: any, withSignerIfPossible = true): Contract | null {
@@ -41,6 +44,21 @@ function useContract(address: string | undefined, ABI: any, withSignerIfPossible
 export function useV1FactoryContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && V1_FACTORY_ADDRESSES[chainId], V1_FACTORY_ABI, false)
+}
+
+export function useUniswapV2HelperContract(): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && UNISWAP_V2_HELPER_ADDRESS, UNISWAP_V2_HELPER_ABI, false)
+}
+
+export function useUniswapV2PairContract(pairAddress: string | undefined): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && pairAddress, UNISWAP_V2_PAIR, false)
+}
+
+export function useUniswapV2FactoryContract(): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && UNISWAP_V2_FACTORY_ADDRESS, UNISWAP_V2_FACTORY_ABI, false)
 }
 
 export function useV2MigratorContract(): Contract | null {
