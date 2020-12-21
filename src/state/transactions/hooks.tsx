@@ -31,6 +31,12 @@ export function useTransactionAdder(): (
       if (!hash) {
         throw Error('No transaction hash found.')
       }
+
+      console.info('Hooks -> useCallback: ')
+      console.info('hash: ', hash)
+      console.info('chainId: ', chainId)
+      console.info('claim: ', claim)
+
       dispatch(addTransaction({ hash, from: account, chainId, approval, summary, claim }))
     },
     [dispatch, chainId, account]

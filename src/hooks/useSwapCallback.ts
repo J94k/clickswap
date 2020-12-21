@@ -222,28 +222,15 @@ export function useSwapCallback(
               tradeVersion === Version.v2 ? withRecipient : `${withRecipient} on ${(tradeVersion as any).toUpperCase()}`
 
             addTransaction(response, {
-              summary: withVersion
+              summary: withVersion,
+              claim: {
+                recipient
+              }
             })
-            console.log('_________________')
-            console.log('________ USE SWAP CALLBACK ________')
-            console.log('________ CONTRACT CALL ________')
-            console.log('trade -> ', trade)
-            console.log('allowedSlippage -> ', allowedSlippage)
-            console.log('recipientAddressOrName -> ', recipientAddressOrName)
-            console.log('inputSymbol -> ', inputSymbol)
-            console.log('outputSymbol -> ', outputSymbol)
-            console.log('inputAmount -> ', inputAmount)
-            console.log('outputAmount -> ', outputAmount)
-            console.log('base -> ', base)
-            console.log('withRecipient -> ', withRecipient)
-            console.log('withVersion -> ', withVersion)
-            console.log('contract -> ', contract)
-            console.log('gasEstimate -> ', gasEstimate)
-            console.log('methodName -> ', methodName)
-            console.log('args -> ', args)
-            console.log('value -> ', value)
-            console.log('_________________')
-            console.log('_________________')
+
+            console.info('useSwapCallback -> onSwap: ')
+            console.info('response: ', response)
+
             return response.hash
           })
           .catch((error: any) => {
