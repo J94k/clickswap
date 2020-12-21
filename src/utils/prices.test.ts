@@ -22,6 +22,8 @@ describe('prices', () => {
         computeTradePriceBreakdown(
           new Trade(new Route([pair12], token1), new TokenAmount(token1, JSBI.BigInt(1000)), TradeType.EXACT_INPUT)
         ).realizedLPFee
+        // ! react test problem with value - 3
+        // ? most likely after the division of the commission 0.3% -> 0.25 and 0.05
       ).toEqual(new TokenAmount(token1, JSBI.BigInt(3)))
     })
 
@@ -34,6 +36,8 @@ describe('prices', () => {
             TradeType.EXACT_INPUT
           )
         ).realizedLPFee
+        // ! react test problem with value - 5
+        // ? most likely after the division of the commission 0.3% -> 0.25 and 0.05
       ).toEqual(new TokenAmount(token1, JSBI.BigInt(5)))
     })
   })
