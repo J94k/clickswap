@@ -2,7 +2,7 @@ import { BigNumber } from '@ethersproject/bignumber'
 import { Contract } from '@ethersproject/contracts'
 import { JSBI, Percent, Router, SwapParameters, Trade, TradeType } from '@uniswap/sdk'
 import { useMemo } from 'react'
-import { BIPS_BASE, INITIAL_ALLOWED_SLIPPAGE } from '../constants'
+import { BIPS_BASE, INITIAL_ALLOWED_SLIPPAGE } from '../constants' // SERVICE_FEE_ADDRESS
 import { getTradeVersion, useV1TradeExchangeAddress } from '../data/V1'
 import { useTransactionAdder } from '../state/transactions/hooks'
 import { calculateGasMargin, getRouterContract, isAddress, shortenAddress } from '../utils'
@@ -224,7 +224,26 @@ export function useSwapCallback(
             addTransaction(response, {
               summary: withVersion
             })
-
+            console.log('_________________')
+            console.log('________ USE SWAP CALLBACK ________')
+            console.log('________ CONTRACT CALL ________')
+            console.log('trade -> ', trade)
+            console.log('allowedSlippage -> ', allowedSlippage)
+            console.log('recipientAddressOrName -> ', recipientAddressOrName)
+            console.log('inputSymbol -> ', inputSymbol)
+            console.log('outputSymbol -> ', outputSymbol)
+            console.log('inputAmount -> ', inputAmount)
+            console.log('outputAmount -> ', outputAmount)
+            console.log('base -> ', base)
+            console.log('withRecipient -> ', withRecipient)
+            console.log('withVersion -> ', withVersion)
+            console.log('contract -> ', contract)
+            console.log('gasEstimate -> ', gasEstimate)
+            console.log('methodName -> ', methodName)
+            console.log('args -> ', args)
+            console.log('value -> ', value)
+            console.log('_________________')
+            console.log('_________________')
             return response.hash
           })
           .catch((error: any) => {

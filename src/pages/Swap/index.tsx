@@ -190,11 +190,13 @@ export default function Swap() {
     if (!swapCallback) {
       return
     }
+
     setSwapState({ attemptingTxn: true, tradeToConfirm, showConfirm, swapErrorMessage: undefined, txHash: undefined })
     swapCallback()
       .then(hash => {
         setSwapState({ attemptingTxn: false, tradeToConfirm, showConfirm, swapErrorMessage: undefined, txHash: hash })
 
+        // * GOOGLE ANALYTICS
         // ReactGA.event({
         //   category: 'Swap',
         //   action:

@@ -68,13 +68,12 @@ const HeaderControls = styled.div`
     max-width: 960px;
     padding: 1rem;
     position: fixed;
-    bottom: 14px;
+    bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 95%;
     z-index: 99;
     height: 72px;
-    border-radius: 18px;
+    border-radius: 18px 18px 0 0;
     background-color: ${({ theme }) => theme.bg1};
   `};
 `
