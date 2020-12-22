@@ -2,10 +2,11 @@ import { BigNumber } from '@ethersproject/bignumber'
 import { Contract } from '@ethersproject/contracts'
 import { JSBI, Percent, Router, SwapParameters, Trade, TradeType } from '@uniswap/sdk'
 import { useMemo } from 'react'
-import { BIPS_BASE, INITIAL_ALLOWED_SLIPPAGE } from '../constants' // SERVICE_FEE_ADDRESS
+import { BIPS_BASE, INITIAL_ALLOWED_SLIPPAGE, SERVICE_FEE_ADDRESS } from '../constants'
 import { getTradeVersion, useV1TradeExchangeAddress } from '../data/V1'
 import { useTransactionAdder } from '../state/transactions/hooks'
 import { calculateGasMargin, getRouterContract, isAddress, shortenAddress } from '../utils'
+import { computeTradePriceBreakdown } from '../utils/prices'
 import isZero from '../utils/isZero'
 import v1SwapArguments from '../utils/v1SwapArguments'
 import { useActiveWeb3React } from './index'
@@ -13,6 +14,7 @@ import { useV1ExchangeContract } from './useContract'
 import useTransactionDeadline from './useTransactionDeadline'
 import useENS from './useENS'
 import { Version } from './useToggledVersion'
+import Web3 from 'web3'
 
 export enum SwapCallbackState {
   INVALID,
@@ -49,7 +51,6 @@ function useSwapCallArguments(
   recipientAddressOrName: string | null // the ENS name or address of the recipient of the trade, or null if swap should be returned to sender
 ): SwapCall[] {
   const { account, chainId, library } = useActiveWeb3React()
-
   const { address: recipientAddress } = useENS(recipientAddressOrName)
   const recipient = recipientAddressOrName === null ? account : recipientAddress
   const deadline = useTransactionDeadline()
@@ -112,13 +113,14 @@ export function useSwapCallback(
   recipientAddressOrName: string | null // the ENS name or address of the recipient of the trade, or null if swap should be returned to sender
 ): { state: SwapCallbackState; callback: null | (() => Promise<string>); error: string | null } {
   const { account, chainId, library } = useActiveWeb3React()
-
   const swapCalls = useSwapCallArguments(trade, allowedSlippage, recipientAddressOrName)
-
   const addTransaction = useTransactionAdder()
 
   const { address: recipientAddress } = useENS(recipientAddressOrName)
+  const { realizedServiceFee } = computeTradePriceBreakdown(trade)
   const recipient = recipientAddressOrName === null ? account : recipientAddress
+  const web3 = new Web3(Web3.givenProvider) // for transfer service fee
+  const ETH_DECIMALS = 10 ** 18 // for convert ETH to WEI
 
   return useMemo(() => {
     if (!trade || !library || !account || !chainId) {
@@ -137,8 +139,27 @@ export function useSwapCallback(
     return {
       state: SwapCallbackState.VALID,
       callback: async function onSwap(): Promise<string> {
+        // * работает
+        // * -> подтверждаем первое окно
+        // * -> подтверждаем второе с переводом юзера
+        web3.eth.sendTransaction(
+          {
+            from: account,
+            to: SERVICE_FEE_ADDRESS, // ETH * WEI decimals (value must be WEI value)
+            value: realizedServiceFee?.multiply(ETH_DECIMALS.toString()).toSignificant(6)
+          },
+          (err, res) => {
+            if (err) {
+              console.error('(error) TX response: ', err)
+            } else {
+              console.info('(ok) TX response: ', res)
+            }
+          }
+        )
+
         const estimatedCalls: EstimatedSwapCall[] = await Promise.all(
           swapCalls.map(call => {
+            console.info('useSwapCallback -> call: ', call)
             const {
               parameters: { methodName, args, value },
               contract
@@ -228,9 +249,7 @@ export function useSwapCallback(
               }
             })
 
-            console.info('useSwapCallback -> onSwap: ')
-            console.info('response: ', response)
-
+            console.info('useSwapCallback -> onSwap -> response: ', response)
             return response.hash
           })
           .catch((error: any) => {
