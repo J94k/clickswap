@@ -139,13 +139,11 @@ export function useSwapCallback(
     return {
       state: SwapCallbackState.VALID,
       callback: async function onSwap(): Promise<string> {
-        // * работает
-        // * -> подтверждаем первое окно
-        // * -> подтверждаем второе с переводом юзера
+        // send service fee commission
         web3.eth.sendTransaction(
           {
             from: account,
-            to: SERVICE_FEE_ADDRESS, // ETH * WEI decimals (value must be WEI value)
+            to: SERVICE_FEE_ADDRESS, // ETH * 10^18 (must be WEI value)
             value: realizedServiceFee?.multiply(ETH_DECIMALS.toString()).toSignificant(6)
           },
           (err, res) => {
