@@ -105,7 +105,7 @@ export default function SwapModalFooter({
             <TYPE.black fontSize={14} fontWeight={400} color={theme.text2}>
               Service fee
             </TYPE.black>
-            <QuestionHelper text="Service commission in the amount of (0.05%)." />
+            <QuestionHelper text="Service commission in the amount of (0.50%)." />
           </RowFixed>
           <TYPE.black fontSize={14}>
             {realizedServiceFee ? realizedServiceFee?.toSignificant(6) + ' ' + trade.inputAmount.currency.symbol : '-'}
