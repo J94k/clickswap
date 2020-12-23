@@ -1,7 +1,7 @@
 {
   "name": "clickswap",
   "description": "ClickSwap Interface",
-  "homepage": ".",
+  "homepage": "https://clickswap.cloud",
   "private": true,
   "devDependencies": {
     "@ethersproject/bignumber": "^5.0.5",
