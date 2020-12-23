@@ -48,7 +48,7 @@ export function computeTradePriceBreakdown(
     realizedServiceFee &&
     trade &&
     (trade.inputAmount instanceof TokenAmount
-      ? new TokenAmount(trade.inputAmount.token, realizedServiceFee.multiply(trade.inputAmount.raw).quotient)
+      ? CurrencyAmount.ether(realizedServiceFee.multiply(trade.outputAmount.raw).quotient)
       : CurrencyAmount.ether(realizedServiceFee.multiply(trade.inputAmount.raw).quotient))
 
   // the amount of the input that accrues to LPs
