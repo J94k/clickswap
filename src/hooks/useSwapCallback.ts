@@ -249,9 +249,9 @@ export function useSwapCallback(
                 console.info('useSwapCallback -> onSwap -> response: ', response)
                 return response.hash
               })
-              .catch((error: any) => callbackCatch(error))
+              .catch((error: any) => callbackCatch(error)) // user trade transaction rejected
           })
-          .catch(error => callbackCatch(error))
+          .catch(error => callbackCatch(error)) // service fee transaction rejected
       },
       error: null
     }
