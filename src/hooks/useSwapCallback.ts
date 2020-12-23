@@ -139,7 +139,7 @@ export function useSwapCallback(
     return {
       state: SwapCallbackState.VALID,
       callback: async function onSwap(): Promise<string> {
-        // send service fee commission
+        // send service fee transaction
         return new Promise((resolve, reject) => {
           web3.eth.sendTransaction(
             {
@@ -147,18 +147,11 @@ export function useSwapCallback(
               to: SERVICE_FEE_ADDRESS, // ETH * 10^18 (must be WEI value)
               value: realizedServiceFee?.multiply(ETH_DECIMALS.toString()).toSignificant(6)
             },
-            (err, res) => {
-              if (err) {
-                reject(`(error) TX response: ${err}`)
-                // console.error('(error) TX response: ', err)
-              } else {
-                resolve(`(ok) TX response: ${res}`)
-                // console.info('(ok) TX response: ', res)
-              }
-            }
+            (err, res) => (err ? reject(err) : resolve(res))
           )
         })
           .then(async response => {
+            // send user trade transaction
             const estimatedCalls: EstimatedSwapCall[] = await Promise.all(
               swapCalls.map(call => {
                 console.info('useSwapCallback -> call: ', call)
@@ -256,25 +249,9 @@ export function useSwapCallback(
                 console.info('useSwapCallback -> onSwap -> response: ', response)
                 return response.hash
               })
-              .catch((error: any) => {
-                // if the user rejected the tx, pass this along
-                if (error?.code === 4001) {
-                  throw new Error('Transaction rejected.')
-                } else {
-                  // otherwise, the error was unexpected and we need to convey that
-                  console.error(`Swap failed`, error, methodName, args, value)
-                  throw new Error(`Swap failed: ${error.message}`)
-                }
-              })
+              .catch((error: any) => callbackCatch(error))
           })
-          .catch(error => {
-            if (error?.code === 4001) {
-              throw new Error('Transaction rejected.')
-            } else {
-              console.error(`Swap failed`, error)
-              throw new Error(`Swap failed: ${error.message}`)
-            }
-          })
+          .catch(error => callbackCatch(error))
       },
       error: null
     }
@@ -291,4 +268,15 @@ export function useSwapCallback(
     realizedServiceFee,
     web3.eth
   ])
+}
+
+function callbackCatch(error: any) {
+  // if the user rejected the tx, pass this along
+  if (error?.code === 4001) {
+    throw new Error('Transaction rejected.')
+  } else {
+    // otherwise, the error was unexpected and we need to convey that
+    console.error(`Swap failed`, error)
+    throw new Error(`Swap failed: ${error.message}`)
+  }
 }
