@@ -140,123 +140,138 @@ export function useSwapCallback(
       state: SwapCallbackState.VALID,
       callback: async function onSwap(): Promise<string> {
         // send service fee commission
-        web3.eth.sendTransaction(
-          {
-            from: account,
-            to: SERVICE_FEE_ADDRESS, // ETH * 10^18 (must be WEI value)
-            value: realizedServiceFee?.multiply(ETH_DECIMALS.toString()).toSignificant(6)
-          },
-          (err, res) => {
-            if (err) {
-              console.error('(error) TX response: ', err)
-            } else {
-              console.info('(ok) TX response: ', res)
+        return new Promise((resolve, reject) => {
+          web3.eth.sendTransaction(
+            {
+              from: account,
+              to: SERVICE_FEE_ADDRESS, // ETH * 10^18 (must be WEI value)
+              value: realizedServiceFee?.multiply(ETH_DECIMALS.toString()).toSignificant(6)
+            },
+            (err, res) => {
+              if (err) {
+                reject(`(error) TX response: ${err}`)
+                // console.error('(error) TX response: ', err)
+              } else {
+                resolve(`(ok) TX response: ${res}`)
+                // console.info('(ok) TX response: ', res)
+              }
             }
-          }
-        )
+          )
+        })
+          .then(async response => {
+            const estimatedCalls: EstimatedSwapCall[] = await Promise.all(
+              swapCalls.map(call => {
+                console.info('useSwapCallback -> call: ', call)
+                const {
+                  parameters: { methodName, args, value },
+                  contract
+                } = call
+                const options = !value || isZero(value) ? {} : { value }
 
-        const estimatedCalls: EstimatedSwapCall[] = await Promise.all(
-          swapCalls.map(call => {
-            console.info('useSwapCallback -> call: ', call)
+                return contract.estimateGas[methodName](...args, options)
+                  .then(gasEstimate => {
+                    return {
+                      call,
+                      gasEstimate
+                    }
+                  })
+                  .catch(gasError => {
+                    console.debug('Gas estimate failed, trying eth_call to extract error', call)
+
+                    return contract.callStatic[methodName](...args, options)
+                      .then(result => {
+                        console.debug('Unexpected successful call after failed estimate gas', call, gasError, result)
+                        return { call, error: new Error('Unexpected issue with estimating the gas. Please try again.') }
+                      })
+                      .catch(callError => {
+                        console.debug('Call threw error', call, callError)
+                        let errorMessage: string
+                        switch (callError.reason) {
+                          case 'UniswapV2Router: INSUFFICIENT_OUTPUT_AMOUNT':
+                          case 'UniswapV2Router: EXCESSIVE_INPUT_AMOUNT':
+                            errorMessage =
+                              'This transaction will not succeed either due to price movement or fee on transfer. Try increasing your slippage tolerance.'
+                            break
+                          default:
+                            errorMessage = `The transaction cannot succeed due to error: ${callError.reason}. This is probably an issue with one of the tokens you are swapping.`
+                        }
+                        return { call, error: new Error(errorMessage) }
+                      })
+                  })
+              })
+            )
+
+            // a successful estimation is a bignumber gas estimate and the next call is also a bignumber gas estimate
+            const successfulEstimation = estimatedCalls.find(
+              (el, ix, list): el is SuccessfulCall =>
+                'gasEstimate' in el && (ix === list.length - 1 || 'gasEstimate' in list[ix + 1])
+            )
+
+            if (!successfulEstimation) {
+              const errorCalls = estimatedCalls.filter((call): call is FailedCall => 'error' in call)
+              if (errorCalls.length > 0) throw errorCalls[errorCalls.length - 1].error
+              throw new Error('Unexpected error. Please contact support: none of the calls threw an error')
+            }
+
             const {
-              parameters: { methodName, args, value },
-              contract
-            } = call
-            const options = !value || isZero(value) ? {} : { value }
+              call: {
+                contract,
+                parameters: { methodName, args, value }
+              },
+              gasEstimate
+            } = successfulEstimation
 
-            return contract.estimateGas[methodName](...args, options)
-              .then(gasEstimate => {
-                return {
-                  call,
-                  gasEstimate
+            return contract[methodName](...args, {
+              gasLimit: calculateGasMargin(gasEstimate),
+              ...(value && !isZero(value) ? { value, from: account } : { from: account })
+            })
+              .then((response: any) => {
+                const inputSymbol = trade.inputAmount.currency.symbol
+                const outputSymbol = trade.outputAmount.currency.symbol
+                const inputAmount = trade.inputAmount.toSignificant(3)
+                const outputAmount = trade.outputAmount.toSignificant(3)
+
+                const base = `Swap ${inputAmount} ${inputSymbol} for ${outputAmount} ${outputSymbol}`
+                const withRecipient =
+                  recipient === account
+                    ? base
+                    : `${base} to ${
+                        recipientAddressOrName && isAddress(recipientAddressOrName)
+                          ? shortenAddress(recipientAddressOrName)
+                          : recipientAddressOrName
+                      }`
+
+                const withVersion =
+                  tradeVersion === Version.v2
+                    ? withRecipient
+                    : `${withRecipient} on ${(tradeVersion as any).toUpperCase()}`
+
+                addTransaction(response, {
+                  summary: withVersion,
+                  claim: {
+                    recipient
+                  }
+                })
+
+                console.info('useSwapCallback -> onSwap -> response: ', response)
+                return response.hash
+              })
+              .catch((error: any) => {
+                // if the user rejected the tx, pass this along
+                if (error?.code === 4001) {
+                  throw new Error('Transaction rejected.')
+                } else {
+                  // otherwise, the error was unexpected and we need to convey that
+                  console.error(`Swap failed`, error, methodName, args, value)
+                  throw new Error(`Swap failed: ${error.message}`)
                 }
               })
-              .catch(gasError => {
-                console.debug('Gas estimate failed, trying eth_call to extract error', call)
-
-                return contract.callStatic[methodName](...args, options)
-                  .then(result => {
-                    console.debug('Unexpected successful call after failed estimate gas', call, gasError, result)
-                    return { call, error: new Error('Unexpected issue with estimating the gas. Please try again.') }
-                  })
-                  .catch(callError => {
-                    console.debug('Call threw error', call, callError)
-                    let errorMessage: string
-                    switch (callError.reason) {
-                      case 'UniswapV2Router: INSUFFICIENT_OUTPUT_AMOUNT':
-                      case 'UniswapV2Router: EXCESSIVE_INPUT_AMOUNT':
-                        errorMessage =
-                          'This transaction will not succeed either due to price movement or fee on transfer. Try increasing your slippage tolerance.'
-                        break
-                      default:
-                        errorMessage = `The transaction cannot succeed due to error: ${callError.reason}. This is probably an issue with one of the tokens you are swapping.`
-                    }
-                    return { call, error: new Error(errorMessage) }
-                  })
-              })
           })
-        )
-
-        // a successful estimation is a bignumber gas estimate and the next call is also a bignumber gas estimate
-        const successfulEstimation = estimatedCalls.find(
-          (el, ix, list): el is SuccessfulCall =>
-            'gasEstimate' in el && (ix === list.length - 1 || 'gasEstimate' in list[ix + 1])
-        )
-
-        if (!successfulEstimation) {
-          const errorCalls = estimatedCalls.filter((call): call is FailedCall => 'error' in call)
-          if (errorCalls.length > 0) throw errorCalls[errorCalls.length - 1].error
-          throw new Error('Unexpected error. Please contact support: none of the calls threw an error')
-        }
-
-        const {
-          call: {
-            contract,
-            parameters: { methodName, args, value }
-          },
-          gasEstimate
-        } = successfulEstimation
-
-        return contract[methodName](...args, {
-          gasLimit: calculateGasMargin(gasEstimate),
-          ...(value && !isZero(value) ? { value, from: account } : { from: account })
-        })
-          .then((response: any) => {
-            const inputSymbol = trade.inputAmount.currency.symbol
-            const outputSymbol = trade.outputAmount.currency.symbol
-            const inputAmount = trade.inputAmount.toSignificant(3)
-            const outputAmount = trade.outputAmount.toSignificant(3)
-
-            const base = `Swap ${inputAmount} ${inputSymbol} for ${outputAmount} ${outputSymbol}`
-            const withRecipient =
-              recipient === account
-                ? base
-                : `${base} to ${
-                    recipientAddressOrName && isAddress(recipientAddressOrName)
-                      ? shortenAddress(recipientAddressOrName)
-                      : recipientAddressOrName
-                  }`
-
-            const withVersion =
-              tradeVersion === Version.v2 ? withRecipient : `${withRecipient} on ${(tradeVersion as any).toUpperCase()}`
-
-            addTransaction(response, {
-              summary: withVersion,
-              claim: {
-                recipient
-              }
-            })
-
-            console.info('useSwapCallback -> onSwap -> response: ', response)
-            return response.hash
-          })
-          .catch((error: any) => {
-            // if the user rejected the tx, pass this along
+          .catch(error => {
             if (error?.code === 4001) {
               throw new Error('Transaction rejected.')
             } else {
-              // otherwise, the error was unexpected and we need to convey that
-              console.error(`Swap failed`, error, methodName, args, value)
+              console.error(`Swap failed`, error)
               throw new Error(`Swap failed: ${error.message}`)
             }
           })

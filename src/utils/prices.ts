@@ -5,18 +5,17 @@ import { Field } from '../state/swap/actions'
 import { basisPointsToPercent } from './index'
 
 // commission liquidity providers
-const BASE_FEE = new Percent(JSBI.BigInt(30), JSBI.BigInt(10000))
+const BASE_FEE = new Percent(JSBI.BigInt(30), JSBI.BigInt(10000)) // 0.3%
 const ONE_HUNDRED_PERCENT = new Percent(JSBI.BigInt(10000), JSBI.BigInt(10000))
 const INPUT_FRACTION_AFTER_BASE_FEE = ONE_HUNDRED_PERCENT.subtract(BASE_FEE)
 // commission for service
-const SERVICE_FEE = new Percent(JSBI.BigInt(50), JSBI.BigInt(10000))
+const SERVICE_FEE = new Percent(JSBI.BigInt(50), JSBI.BigInt(10000)) // 0.5%
 const INPUT_FRACTION_AFTER_SERVICE_FEE = ONE_HUNDRED_PERCENT.subtract(SERVICE_FEE)
 
 // computes price breakdown for the trade
 export function computeTradePriceBreakdown(
   trade?: Trade
 ): { priceImpactWithoutFee?: Percent; realizedLPFee?: CurrencyAmount; realizedServiceFee?: CurrencyAmount } {
-  // commission 0.5%
   const realizedServiceFee = !trade
     ? undefined
     : ONE_HUNDRED_PERCENT.subtract(

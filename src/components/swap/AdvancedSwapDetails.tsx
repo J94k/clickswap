@@ -67,7 +67,7 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
             <QuestionHelper text="Service commission in the amount of (0.50%)." />
           </RowFixed>
           <TYPE.black fontSize={14}>
-            {realizedServiceFee ? realizedServiceFee?.toSignificant(6) + ' ' + trade.inputAmount.currency.symbol : '-'}
+            {realizedServiceFee ? realizedServiceFee?.toSignificant(6) + ' ETH' : '-'}
           </TYPE.black>
         </RowBetween>
 
