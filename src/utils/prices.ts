@@ -9,7 +9,7 @@ const BASE_FEE = new Percent(JSBI.BigInt(30), JSBI.BigInt(10000)) // 0.3%
 const ONE_HUNDRED_PERCENT = new Percent(JSBI.BigInt(10000), JSBI.BigInt(10000))
 const INPUT_FRACTION_AFTER_BASE_FEE = ONE_HUNDRED_PERCENT.subtract(BASE_FEE)
 // commission for service
-const SERVICE_FEE = new Percent(JSBI.BigInt(50), JSBI.BigInt(10000)) // 0.5%
+const SERVICE_FEE = new Percent(JSBI.BigInt(5), JSBI.BigInt(10000)) // 0.05%
 const INPUT_FRACTION_AFTER_SERVICE_FEE = ONE_HUNDRED_PERCENT.subtract(SERVICE_FEE)
 
 // computes price breakdown for the trade
