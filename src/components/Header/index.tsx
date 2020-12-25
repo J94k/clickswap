@@ -183,6 +183,10 @@ const Title = styled.a`
   :hover {
     cursor: pointer;
   }
+
+  @media (max-width: 400px) {
+    display: none;
+  }
 `
 
 const UniIcon = styled.div`
