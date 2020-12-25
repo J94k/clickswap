@@ -224,6 +224,34 @@ const StyledNavLink = styled(NavLink).attrs({
   }
 `
 
+const RedirectLink = styled.a`
+  ${({ theme }) => theme.flexRowNoWrap}
+  align-items: left;
+  border-radius: 3rem;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+  color: ${({ theme }) => theme.text2};
+  font-size: 1.3rem;
+  width: fit-content;
+  margin: 0 12px;
+  font-weight: 500;
+  transition: transform 0.3s ease;
+
+  &.${activeClassName} {
+    font-weight: 600;
+    color: ${({ theme }) => theme.text1};
+  }
+
+  :hover {
+    transform: translateY(0.2em);
+    color: ${({ theme }) => darken(0.1, theme.text1)};
+  }
+  :focus {
+    color: ${({ theme }) => darken(0.1, theme.text1)};
+  }
+`
+
 // const StyledExternalLink = styled(ExternalLink).attrs({
 //   activeClassName
 // })<{ isActive?: boolean }>`
@@ -295,10 +323,12 @@ export default function Header() {
             <img width={'80px'} src={Logo} alt="logo" />
           </UniIcon>
         </Title>
+
         <HeaderLinks>
           <StyledNavLink id={`swap-nav-link`} to={'/swap'}>
             {t('swap')}
           </StyledNavLink>
+
           <StyledNavLink
             id={`pool-nav-link`}
             to={'/pool'}
@@ -312,6 +342,11 @@ export default function Header() {
           >
             {t('pool')}
           </StyledNavLink>
+
+          <RedirectLink href={'https://info.clickswap.cloud/'} target="_blank">
+            {t('analytics')}
+          </RedirectLink>
+
           {/* <StyledNavLink id={`stake-nav-link`} to={'/uni'}>
             UNI
           </StyledNavLink> */}
@@ -323,6 +358,7 @@ export default function Header() {
           </StyledExternalLink> */}
         </HeaderLinks>
       </HeaderRow>
+
       <HeaderControls>
         <HeaderElement>
           <HideSmall>
