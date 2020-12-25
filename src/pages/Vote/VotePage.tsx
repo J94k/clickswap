@@ -39,7 +39,7 @@ const ProposalInfo = styled(AutoColumn)`
 const ArrowWrapper = styled(StyledInternalLink)`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   height: 24px;
   color: ${({ theme }) => theme.text1};
 

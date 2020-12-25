@@ -45,7 +45,7 @@ const PopoverContainer = styled.div<{ show: boolean }>`
   padding: 1rem;
   display: grid;
   grid-template-rows: 1fr;
-  grid-gap: 8px;
+  grid-gap: 6px;
   font-size: 1rem;
   text-align: left;
 `
