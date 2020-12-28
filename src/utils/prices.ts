@@ -5,7 +5,7 @@ import { Field } from '../state/swap/actions'
 import { basisPointsToPercent } from './index'
 
 // commission liquidity providers
-const BASE_FEE = new Percent(JSBI.BigInt(30), JSBI.BigInt(10000)) // 0.3%
+const BASE_FEE = new Percent(JSBI.BigInt(28), JSBI.BigInt(10000)) // 0.28%
 const ONE_HUNDRED_PERCENT = new Percent(JSBI.BigInt(10000), JSBI.BigInt(10000))
 const INPUT_FRACTION_AFTER_BASE_FEE = ONE_HUNDRED_PERCENT.subtract(BASE_FEE)
 // commission for service
@@ -25,8 +25,8 @@ export function computeTradePriceBreakdown(
         )
       )
 
-  // for each hop in our trade, take away the x*y=k price impact from 0.3% fees
-  // e.g. for 3 tokens/2 hops: 1 - ((1 - 0.03) * (1 - 0.03))
+  // for each hop in our trade, take away the x*y=k price impact from 0.28% fees
+  // e.g. for 3 tokens/2 hops: 1 - ((1 - 0.028) * (1 - 0.028))
   const realizedLPFee = !trade
     ? undefined
     : ONE_HUNDRED_PERCENT.subtract(
