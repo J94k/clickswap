@@ -14,40 +14,35 @@
       "address": "0x2823589Ae095D99bD64dEeA80B4690313e2fB519",
       "symbol": "WEENUS",
       "name": "Weenus",
-      "decimals": 18,
-      "logoURI": ""
+      "decimals": 18
     },
     {
       "chainId": 3,
       "address": "0x101848D5C5bBca18E6b4431eEdF6B95E9ADF82FA",
       "symbol": "WEENUS",
       "name": "Weenus",
-      "decimals": 18,
-      "logoURI": ""
+      "decimals": 18
     },
     {
       "chainId": 4,
       "address": "0xaFF4481D10270F50f203E0763e2597776068CBc5",
       "symbol": "WEENUS",
       "name": "Weenus",
-      "decimals": 18,
-      "logoURI": ""
+      "decimals": 18
     },
     {
       "chainId": 5,
       "address": "0xaFF4481D10270F50f203E0763e2597776068CBc5",
       "symbol": "WEENUS",
       "name": "Weenus",
-      "decimals": 18,
-      "logoURI": ""
+      "decimals": 18
     },
     {
       "chainId": 42,
       "address": "0xaFF4481D10270F50f203E0763e2597776068CBc5",
       "symbol": "WEENUS",
       "name": "Weenus",
-      "decimals": 18,
-      "logoURI": ""
+      "decimals": 18
     },
     {
       "chainId": 1,
@@ -69,7 +64,7 @@
       "chainId": 1,
       "address": "0x960b236A07cf122663c4303350609A66A7B288C0",
       "symbol": "ANT",
-      "name": "Aragon ANT (old)",
+      "name": "Aragon ANT",
       "decimals": 18,
       "logoURI": "https://clickswap.cloud/token-list/images/tokens/ant.svg"
     },
