@@ -87,10 +87,16 @@ const HeaderRow = styled(RowFixed)`
 
 const HeaderLinks = styled(Row)`
   justify-content: center;
+
   ${({ theme }) => theme.mediaWidth.upToMedium`
     padding: 1rem 0 1rem 1rem;
     justify-content: flex-end;
-`};
+
+    @media (max-width: 400px) {
+      padding: 1rem 0;
+      justify-content: space-between;
+    }
+  `};
 `
 
 const AccountElement = styled.div<{ active: boolean }>`
@@ -196,6 +202,7 @@ const RedirectLink = styled.a`
   outline: none;
   cursor: pointer;
   text-decoration: none;
+  white-space: nowrap;
   color: ${({ theme }) => theme.text2};
   font-size: 1.3rem;
   width: fit-content;
