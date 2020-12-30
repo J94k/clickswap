@@ -1,7 +1,5 @@
 # Uniswap Contracts (Replace and deploy)
 
-## Replace contracts
-
 - [Uniswap factory code](https://etherscan.io/address/0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f#code)
 - [Uniswap router code](https://etherscan.io/address/0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D#code)
 
@@ -31,6 +29,6 @@ bytes32 public constant INIT_CODE_PAIR_HASH = keccak256(abi.encodePacked(type(Un
 ```bash
 src/constants/index.ts (ROUTER_ADDRESS)
 src/state/swap/hooks.ts
-node_module/@uniswap/sdk/*
+node_module/@uniswap/sdk/dist/*
 src/constants/abis/ (if have)
 ```

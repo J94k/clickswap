@@ -2,9 +2,16 @@ import { ChainId, JSBI, Percent, Token, WETH } from '@uniswap/sdk'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { fortmatic, injected, portis, walletconnect, walletlink } from '../connectors'
 
-export const ROUTER_ADDRESS = '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D' // V2
+/**
+ * Rinkeby
+ * Factory: 0xd13ECcCf5748Db5694AB63527407C72a36133c2C
+ * Factory: init hash code 0x209e24989dcbf4867e427b7e02c5eaabb4336b48574c4afea1624dacbfe38317
+ * Router: 0x617F2119Beaf32203625658581709006A8b8B8F8
+ * setFeeTo address: 0x10aA8C82e3656170baAE80D189b8b7DcEA6865C9
+ */
+
+export const ROUTER_ADDRESS = '0x617F2119Beaf32203625658581709006A8b8B8F8'
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
-export const SERVICE_FEE_ADDRESS = '0x10aA8C82e3656170baAE80D189b8b7DcEA6865C9' // mainnet
 
 // a list of tokens by chain
 type ChainTokenList = {
