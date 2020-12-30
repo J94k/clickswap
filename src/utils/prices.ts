@@ -4,12 +4,12 @@ import { ALLOWED_PRICE_IMPACT_HIGH, ALLOWED_PRICE_IMPACT_LOW, ALLOWED_PRICE_IMPA
 import { Field } from '../state/swap/actions'
 import { basisPointsToPercent } from './index'
 
-// commission liquidity providers
-const BASE_FEE = new Percent(JSBI.BigInt(28), JSBI.BigInt(10000)) // 0.28%
+// liquidity providers commission
+const BASE_FEE = new Percent(JSBI.BigInt(25), JSBI.BigInt(10000)) // 0.25%
 const ONE_HUNDRED_PERCENT = new Percent(JSBI.BigInt(10000), JSBI.BigInt(10000))
 const INPUT_FRACTION_AFTER_BASE_FEE = ONE_HUNDRED_PERCENT.subtract(BASE_FEE)
-// commission for service
-const SERVICE_FEE = new Percent(JSBI.BigInt(2), JSBI.BigInt(10000)) // 0.02%
+// service commission
+const SERVICE_FEE = new Percent(JSBI.BigInt(5), JSBI.BigInt(10000)) // 0.05%
 const INPUT_FRACTION_AFTER_SERVICE_FEE = ONE_HUNDRED_PERCENT.subtract(SERVICE_FEE)
 
 // computes price breakdown for the trade
@@ -25,8 +25,8 @@ export function computeTradePriceBreakdown(
         )
       )
 
-  // for each hop in our trade, take away the x*y=k price impact from 0.28% fees
-  // e.g. for 3 tokens/2 hops: 1 - ((1 - 0.028) * (1 - 0.028))
+  // for each hop in our trade, take away the x*y=k price impact from 0.25% fees
+  // e.g. for 3 tokens/2 hops: 1 - ((1 - 0.025) * (1 - 0.025))
   const realizedLPFee = !trade
     ? undefined
     : ONE_HUNDRED_PERCENT.subtract(
@@ -48,7 +48,7 @@ export function computeTradePriceBreakdown(
     realizedServiceFee &&
     trade &&
     (trade.inputAmount instanceof TokenAmount
-      ? CurrencyAmount.ether(realizedServiceFee.multiply(trade.outputAmount.raw).quotient)
+      ? new TokenAmount(trade.inputAmount.token, realizedServiceFee.multiply(trade.inputAmount.raw).quotient)
       : CurrencyAmount.ether(realizedServiceFee.multiply(trade.inputAmount.raw).quotient))
 
   // the amount of the input that accrues to LPs

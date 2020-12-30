@@ -64,10 +64,10 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
             <TYPE.black fontSize={14} fontWeight={400} color={theme.text2}>
               Service fee
             </TYPE.black>
-            <QuestionHelper text="Service commission in the amount of (0.02%)." />
+            <QuestionHelper text="Service commission in the amount of (0.05%)." />
           </RowFixed>
           <TYPE.black fontSize={14}>
-            {realizedServiceFee ? realizedServiceFee?.toSignificant(6) + ' ETH' : '-'}
+            {realizedServiceFee ? `${realizedServiceFee.toSignificant(4)} ${trade.inputAmount.currency.symbol}` : '-'}
           </TYPE.black>
         </RowBetween>
 
@@ -76,7 +76,7 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
             <TYPE.black fontSize={14} fontWeight={400} color={theme.text2}>
               Liquidity Provider Fee
             </TYPE.black>
-            <QuestionHelper text="A portion of each trade (0.28%) goes to liquidity providers as a protocol incentive." />
+            <QuestionHelper text="A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive." />
           </RowFixed>
           <TYPE.black fontSize={14} color={theme.text1}>
             {realizedLPFee ? `${realizedLPFee.toSignificant(4)} ${trade.inputAmount.currency.symbol}` : '-'}
