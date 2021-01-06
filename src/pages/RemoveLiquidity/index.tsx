@@ -244,24 +244,27 @@ export default function RemoveLiquidity({
     }
     // we have a signataure, use permit versions of remove liquidity
     else if (signatureData !== null) {
-      // removeLiquidityETHWithPermit
       if (oneCurrencyIsETH) {
         methodNames = ['removeLiquidityETHWithPermit', 'removeLiquidityETHWithPermitSupportingFeeOnTransferTokens']
         args = [
+          // token address
           currencyBIsETH ? tokenA.address : tokenB.address,
           liquidityAmount.raw.toString(),
+          // token amount
           amountsMin[currencyBIsETH ? Field.CURRENCY_A : Field.CURRENCY_B].toString(),
+          // eth amount
           amountsMin[currencyBIsETH ? Field.CURRENCY_B : Field.CURRENCY_A].toString(),
           account,
           signatureData.deadline,
+          // approve max ?
           false,
           signatureData.v,
           signatureData.r,
           signatureData.s
         ]
-      }
-      // removeLiquidityETHWithPermit
-      else {
+        console.log('*** One currency is ETH ***')
+        console.log('Method args: ', args)
+      } else {
         methodNames = ['removeLiquidityWithPermit']
         args = [
           tokenA.address,
@@ -276,6 +279,8 @@ export default function RemoveLiquidity({
           signatureData.r,
           signatureData.s
         ]
+        console.log('*** Pair does not have ETH ***')
+        console.log('Method args: ', args)
       }
     } else {
       throw new Error('Attempting to confirm without approval or a signature. Please contact support.')

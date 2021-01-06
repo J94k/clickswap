@@ -159,6 +159,7 @@ const Title = styled.a`
 
 const ClickswapIcon = styled.div`
   transition: transform 0.3s ease;
+
   :hover {
     transform: translateY(0.2em);
   }
@@ -175,12 +176,12 @@ const StyledNavLink = styled(NavLink).attrs({
   outline: none;
   cursor: pointer;
   text-decoration: none;
-  color: ${({ theme }) => theme.text2};
+  color: ${({ theme }) => theme.text3};
   font-size: 1.3rem;
   width: fit-content;
   margin: 0 12px;
   font-weight: 500;
-  transition: transform 0.3s ease;
+  transition: 0.3s ease;
 
   &.${activeClassName} {
     font-weight: 600;
@@ -191,6 +192,7 @@ const StyledNavLink = styled(NavLink).attrs({
     transform: translateY(0.2em);
     color: ${({ theme }) => darken(0.1, theme.text1)};
   }
+
   :focus {
     color: ${({ theme }) => darken(0.1, theme.text1)};
   }
@@ -203,11 +205,12 @@ const RedirectLink = styled.a`
   cursor: pointer;
   text-decoration: none;
   white-space: nowrap;
-  color: ${({ theme }) => theme.text2};
+  color: ${({ theme }) => theme.text3};
   font-size: 1.3rem;
   width: fit-content;
   margin: 0 12px;
   font-weight: 500;
+  transition: 0.3s ease;
 
   &.${activeClassName} {
     font-weight: 600;
