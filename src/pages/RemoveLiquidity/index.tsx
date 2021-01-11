@@ -168,6 +168,14 @@ export default function RemoveLiquidity({
           approveCallback()
         }
       })
+
+    // получаем на выходе после подтверждения (Aprove btn)
+
+    // owner: 0x57d49704F453CdD2b995280d9D7F557E42847d82 -> мой адрес, скорее всего ок
+    // spender: 0x617F2119Beaf32203625658581709006A8b8B8F8 -> router address, 99% проблема в роутере
+    // value: 149999999999999500 -> ликвидность
+    // nonce: 0x00 -> у юнисвап тот же, врятли есть проблема
+    // deadline: 1610294625 -> со временем все должно быть хорошо
   }
 
   // wrapped onUserInput to clear signatures
@@ -262,7 +270,7 @@ export default function RemoveLiquidity({
           signatureData.r,
           signatureData.s
         ]
-        console.log('*** One currency is ETH ***')
+        console.log('Remove liquidity: one currency is ETH ')
         console.log('Method args: ', args)
       } else {
         methodNames = ['removeLiquidityWithPermit']
@@ -279,7 +287,7 @@ export default function RemoveLiquidity({
           signatureData.r,
           signatureData.s
         ]
-        console.log('*** Pair does not have ETH ***')
+        console.log('Remove liquidity: pair does not have ETH')
         console.log('Method args: ', args)
       }
     } else {

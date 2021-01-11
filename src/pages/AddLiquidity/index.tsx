@@ -153,6 +153,8 @@ export default function AddLiquidity({
         deadline.toHexString()
       ]
       value = BigNumber.from((tokenBIsETH ? parsedAmountB : parsedAmountA).raw.toString())
+      console.log('Add liquidity: One currency is ETH')
+      console.log('Method args: ', args)
     } else {
       estimate = router.estimateGas.addLiquidity
       method = router.addLiquidity
@@ -167,6 +169,8 @@ export default function AddLiquidity({
         deadline.toHexString()
       ]
       value = null
+      console.log('Add liquidity: One currency is ETH')
+      console.log('Method args: ', args)
     }
 
     setAttemptingTxn(true)

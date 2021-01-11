@@ -227,7 +227,7 @@ export function useSwapCallback(
               }
             })
 
-            console.info('useSwapCallback -> onSwap -> response: ', response)
+            console.info('useSwapCallback: response: ', response)
             return response.hash
           })
           .catch((error: any) => callbackCatch(error)) // user trade transaction rejected
