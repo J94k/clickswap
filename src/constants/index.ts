@@ -3,25 +3,17 @@ import { AbstractConnector } from '@web3-react/abstract-connector'
 import { fortmatic, injected, portis, walletconnect, walletlink } from '../connectors'
 
 /**
- * Rinkeby second (working now)
- * factory contract: 0x8e89f360089F2cd1Cc32cC128b0214f8017Ff2dB
+ * Rinkeby
+ * factory contract: 0x67c9B9e4b56af9b2BE226600bAAF1ac1422B9fF8
  * feeToSetter: 0x57d49704F453CdD2b995280d9D7F557E42847d82
  * feeTo: 0x57d49704F453CdD2b995280d9D7F557E42847d82
  * INIT_CODE_HASH: 0x74f9426de93ca8c1c0ea7ad57d6ead3854a900f097c11faf2d5b7ee4c48dbddc
- * weth contract: 0xc778417e063141139fce010982780140aa0cd5ab
- * router contract: 0x1cF19d93fA04C839C9104d979C89D36Cd3416617
- */
-
-/**
- * Rinkeby first
- * Factory: 0xd13ECcCf5748Db5694AB63527407C72a36133c2C
- * INIT_CODE_HASH: 0x209e24989dcbf4867e427b7e02c5eaabb4336b48574c4afea1624dacbfe38317
- * Router: 0x617F2119Beaf32203625658581709006A8b8B8F8
  *
- * feeTo address: 0x10aA8C82e3656170baAE80D189b8b7DcEA6865C9 (mainnet)
+ * weth contract: 0xc778417e063141139fce010982780140aa0cd5ab
+ * router contract: 0x0b024aB7886e87dDe36103d6F4A53E35456d5341
  */
 
-export const ROUTER_ADDRESS = '0x1cF19d93fA04C839C9104d979C89D36Cd3416617'
+export const ROUTER_ADDRESS = '0x0b024aB7886e87dDe36103d6F4A53E35456d5341'
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 
 // a list of tokens by chain
