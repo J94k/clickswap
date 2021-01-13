@@ -1,6 +1,5 @@
 import React, { useContext, useMemo } from 'react'
 import styled, { ThemeContext } from 'styled-components'
-import { darken } from 'polished'
 import { Pair, JSBI } from '@uniswap/sdk'
 import { Link } from 'react-router-dom'
 import { SwapPoolTabs } from '../../components/NavigationTabs'
@@ -30,7 +29,7 @@ const PageWrapper = styled(AutoColumn)`
 const VoteCard = styled(DataCard)`
   overflow: hidden;
   border: none;
-  background-color: ${({ theme }) => darken(0.04, theme.bg2)};
+  background-color: ${({ theme }) => theme.bg1};
 `
 
 const TitleRow = styled(RowBetween)`
