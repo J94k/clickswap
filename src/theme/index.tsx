@@ -59,8 +59,8 @@ export function colors(darkMode: boolean): Colors {
     advancedBG: darkMode ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.6)',
 
     //primary colors
-    primary1: darkMode ? '#655ece' : '#7b68ee',
-    primary2: darkMode ? '#6d6bbe' : '#746cc0',
+    primary1: darkMode ? '#7b68ee' : '#655ece',
+    primary2: darkMode ? '#746cc0' : '#6d6bbe',
     primary3: darkMode ? '#7173b3' : '#7173b3',
     primary4: darkMode ? '#766ece' : '#7b78ee',
     primary5: darkMode ? '#b9b9e5' : '#dcd0ff',
@@ -94,7 +94,7 @@ export function theme(darkMode: boolean): DefaultTheme {
     },
 
     //shadows
-    shadow1: darkMode ? '#000' : '#2F80ED',
+    shadow1: darkMode ? '#000' : '#ac88f0',
 
     // media queries
     mediaWidth: mediaWidthTemplates,

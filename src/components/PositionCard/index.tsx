@@ -13,11 +13,8 @@ import { ExternalLink, TYPE, HideExtraSmall, ExtraSmallOnly } from '../../theme'
 import { currencyId } from '../../utils/currencyId'
 import { unwrappedToken } from '../../utils/wrappedCurrency'
 import { ButtonPrimary, ButtonSecondary, ButtonEmpty, ButtonUNIGradient } from '../Button'
-import { transparentize } from 'polished'
 import { CardNoise } from '../earn/styled'
-
 import { useColor } from '../../hooks/useColor'
-
 import Card, { GreyCard, LightCard } from '../Card'
 import { AutoColumn } from '../Column'
 import CurrencyLogo from '../CurrencyLogo'
@@ -38,8 +35,7 @@ export const HoverCard = styled(Card)`
 `
 const StyledPositionCard = styled(LightCard)<{ bgColor: any }>`
   border: none;
-  background: ${({ theme, bgColor }) =>
-    `radial-gradient(91.85% 100% at 1.84% 0%, ${transparentize(0.8, bgColor)} 0%, ${theme.bg3} 100%) `};
+  background-color: ${({ theme }) => darken(0.03, theme.bg2)};
   position: relative;
   overflow: hidden;
 `
@@ -219,12 +215,12 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
               {showMore ? (
                 <>
                   Manage
-                  <ChevronUp size="20" style={{ marginLeft: '10px' }} />
+                  <ChevronUp size="35" style={{ marginLeft: '10px' }} />
                 </>
               ) : (
                 <>
                   Manage
-                  <ChevronDown size="20" style={{ marginLeft: '10px' }} />
+                  <ChevronDown size="35" style={{ marginLeft: '10px' }} />
                 </>
               )}
             </ButtonEmpty>
@@ -303,7 +299,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
                 style={{ width: '100%', textAlign: 'center' }}
                 href={`https://info.clickswap.cloud/#/account/${account}`}
               >
-                View accrued fees and analytics<span style={{ fontSize: '11px' }}>↗</span>
+                View accrued fees and analytics<span style={{ fontSize: '12px' }}>↗</span>
               </ExternalLink>
             </ButtonSecondary>
             {userDefaultPoolBalance && JSBI.greaterThan(userDefaultPoolBalance.raw, BIG_INT_ZERO) && (

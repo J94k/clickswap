@@ -3,7 +3,7 @@ import { AbstractConnector } from '@web3-react/abstract-connector'
 import { fortmatic, injected, portis, walletconnect, walletlink } from '../connectors'
 
 /**
- * Mainnet
+ * > Mainnet
  *
  * Factory:
  * INIT_CODE_HASH:
@@ -15,7 +15,7 @@ import { fortmatic, injected, portis, walletconnect, walletlink } from '../conne
  */
 
 /**
- * Rinkeby
+ * > Rinkeby
  *
  * Factory: 0x67c9B9e4b56af9b2BE226600bAAF1ac1422B9fF8
  * INIT_CODE_HASH: 0x74f9426de93ca8c1c0ea7ad57d6ead3854a900f097c11faf2d5b7ee4c48dbddc
@@ -24,6 +24,18 @@ import { fortmatic, injected, portis, walletconnect, walletlink } from '../conne
  *
  * WETH: 0xc778417e063141139fce010982780140aa0cd5ab
  * Router: 0x0b024aB7886e87dDe36103d6F4A53E35456d5341
+ */
+
+/**
+ * > Ropsten
+ *
+ * Factory: 0xD079a102A47FA31dA9FAFCeFdb3f111f8dC89edb
+ * INIT_CODE_HASH: 0x23c52d3b8889cd42bb46488d9f981e531ce1be67642fe5d881b420a115492de4
+ * feeToSetter: 0x57d49704F453CdD2b995280d9D7F557E42847d82
+ * feeTo: 0x57d49704F453CdD2b995280d9D7F557E42847d82
+ *
+ * WETH: 0xc778417e063141139fce010982780140aa0cd5ab
+ * Router: 0xF9074FaE8e056894C319B83e731400344569508d
  */
 
 export const ROUTER_ADDRESS = '0x0b024aB7886e87dDe36103d6F4A53E35456d5341'
