@@ -3,14 +3,27 @@ import { AbstractConnector } from '@web3-react/abstract-connector'
 import { fortmatic, injected, portis, walletconnect, walletlink } from '../connectors'
 
 /**
+ * Mainnet
+ *
+ * Factory:
+ * INIT_CODE_HASH:
+ * feeToSetter: 0x57d49704F453CdD2b995280d9D7F557E42847d82
+ * feeTo: 0x10aA8C82e3656170baAE80D189b8b7DcEA6865C9
+ *
+ * WETH: 0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2
+ * Router:
+ */
+
+/**
  * Rinkeby
- * factory contract: 0x67c9B9e4b56af9b2BE226600bAAF1ac1422B9fF8
+ *
+ * Factory: 0x67c9B9e4b56af9b2BE226600bAAF1ac1422B9fF8
+ * INIT_CODE_HASH: 0x74f9426de93ca8c1c0ea7ad57d6ead3854a900f097c11faf2d5b7ee4c48dbddc
  * feeToSetter: 0x57d49704F453CdD2b995280d9D7F557E42847d82
  * feeTo: 0x57d49704F453CdD2b995280d9D7F557E42847d82
- * INIT_CODE_HASH: 0x74f9426de93ca8c1c0ea7ad57d6ead3854a900f097c11faf2d5b7ee4c48dbddc
  *
- * weth contract: 0xc778417e063141139fce010982780140aa0cd5ab
- * router contract: 0x0b024aB7886e87dDe36103d6F4A53E35456d5341
+ * WETH: 0xc778417e063141139fce010982780140aa0cd5ab
+ * Router: 0x0b024aB7886e87dDe36103d6F4A53E35456d5341
  */
 
 export const ROUTER_ADDRESS = '0x0b024aB7886e87dDe36103d6F4A53E35456d5341'

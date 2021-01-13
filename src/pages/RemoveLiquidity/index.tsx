@@ -299,6 +299,7 @@ export default function RemoveLiquidity({
           .then(calculateGasMargin)
           .catch(error => {
             setErrorMessage(error.message)
+            setShowError(true)
             console.error(`estimateGas failed`, methodName, args, error)
             return undefined
           })
@@ -478,15 +479,11 @@ export default function RemoveLiquidity({
     setTxHash('')
   }, [onUserInput, txHash])
 
-  const handleErrorConfirmation = useCallback(() => {
+  const handleErrorConfirmation = () => {
     setShowError(false)
     setErrorMessage('')
-    setSignatureData(null)
-    if (txHash) {
-      onUserInput(Field.LIQUIDITY_PERCENT, '0')
-    }
-    setTxHash('')
-  }, [onUserInput, txHash])
+    handleDismissConfirmation()
+  }
 
   const [innerLiquidityPercentage, setInnerLiquidityPercentage] = useDebouncedChangeHandler(
     Number.parseInt(parsedAmounts[Field.LIQUIDITY_PERCENT].toFixed(0)),

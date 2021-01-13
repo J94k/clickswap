@@ -86,9 +86,6 @@ export default function App() {
             <Switch>
               <Route exact strict path="/swap" component={Swap} />
               <Route exact strict path="/swap/:outputCurrency" component={RedirectToSwap} />
-              {/* у юнисвапа не работают ссылки с input + input/output 
-                  роутинг только для выходного значения в Swap/redirects.
-              */}
               {/* <Route exact strict path="/swap/:inputCurrency" component={RedirectToSwap} /> */}
               {/* <Route exact strict path="/swap/:inputCurrency:outputCurrency" component={RedirectToSwap} /> */}
               <Route exact strict path="/send" component={RedirectPathToSwapOnly} />
