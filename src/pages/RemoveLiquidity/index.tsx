@@ -11,7 +11,10 @@ import { ThemeContext } from 'styled-components'
 import { ButtonPrimary, ButtonLight, ButtonError, ButtonConfirmed } from '../../components/Button'
 import { LightCard } from '../../components/Card'
 import { AutoColumn, ColumnCenter } from '../../components/Column'
-import TransactionConfirmationModal, { ConfirmationModalContent } from '../../components/TransactionConfirmationModal'
+import TransactionConfirmationModal, {
+  ConfirmationModalContent,
+  TransactionErrorContent
+} from '../../components/TransactionConfirmationModal'
 import CurrencyInputPanel from '../../components/CurrencyInputPanel'
 import DoubleCurrencyLogo from '../../components/DoubleLogo'
 import { AddRemoveTabs } from '../../components/NavigationTabs'
@@ -71,6 +74,8 @@ export default function RemoveLiquidity({
 
   // modal and loading
   const [showConfirm, setShowConfirm] = useState<boolean>(false)
+  const [showError, setShowError] = useState<boolean>(false)
+  const [errorMessage, setErrorMessage] = useState<string>('')
   const [showDetailed, setShowDetailed] = useState<boolean>(false)
   const [attemptingTxn, setAttemptingTxn] = useState(false) // clicked confirm
 
@@ -105,7 +110,9 @@ export default function RemoveLiquidity({
 
   async function onAttemptToApprove() {
     if (!pairContract || !pair || !library || !deadline) throw new Error('missing dependencies')
+
     const liquidityAmount = parsedAmounts[Field.LIQUIDITY]
+
     if (!liquidityAmount) throw new Error('missing liquidity amount')
 
     if (isArgentWallet) {
@@ -122,7 +129,7 @@ export default function RemoveLiquidity({
       { name: 'verifyingContract', type: 'address' }
     ]
     const domain = {
-      name: 'Clickswap V2',
+      name: 'Uniswap V2',
       version: '1',
       chainId: chainId,
       verifyingContract: pair.liquidityToken.address
@@ -286,12 +293,12 @@ export default function RemoveLiquidity({
       throw new Error('Attempting to confirm without approval or a signature. Please contact support.')
     }
 
-    // ! ERC20 contract -> permit function -> INVALID_SIGNATURE
     const safeGasEstimates: (BigNumber | undefined)[] = await Promise.all(
       methodNames.map(methodName =>
         router.estimateGas[methodName](...args)
           .then(calculateGasMargin)
           .catch(error => {
+            setErrorMessage(error.message)
             console.error(`estimateGas failed`, methodName, args, error)
             return undefined
           })
@@ -471,6 +478,16 @@ export default function RemoveLiquidity({
     setTxHash('')
   }, [onUserInput, txHash])
 
+  const handleErrorConfirmation = useCallback(() => {
+    setShowError(false)
+    setErrorMessage('')
+    setSignatureData(null)
+    if (txHash) {
+      onUserInput(Field.LIQUIDITY_PERCENT, '0')
+    }
+    setTxHash('')
+  }, [onUserInput, txHash])
+
   const [innerLiquidityPercentage, setInnerLiquidityPercentage] = useDebouncedChangeHandler(
     Number.parseInt(parsedAmounts[Field.LIQUIDITY_PERCENT].toFixed(0)),
     liquidityPercentChangeCallback
@@ -494,6 +511,14 @@ export default function RemoveLiquidity({
                 bottomContent={modalBottom}
               />
             )}
+            pendingText={pendingText}
+          />
+          <TransactionConfirmationModal
+            isOpen={showError}
+            onDismiss={handleErrorConfirmation}
+            attemptingTxn={attemptingTxn}
+            hash={txHash ? txHash : ''}
+            content={() => <TransactionErrorContent onDismiss={handleErrorConfirmation} message={errorMessage} />}
             pendingText={pendingText}
           />
           <AutoColumn gap="md">
