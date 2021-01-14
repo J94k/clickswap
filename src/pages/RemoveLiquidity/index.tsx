@@ -300,6 +300,7 @@ export default function RemoveLiquidity({
           .catch(error => {
             setErrorMessage(error.message)
             setShowError(true)
+            handleDismissConfirmation()
             console.error(`estimateGas failed`, methodName, args, error)
             return undefined
           })
@@ -482,7 +483,6 @@ export default function RemoveLiquidity({
   const handleErrorConfirmation = () => {
     setShowError(false)
     setErrorMessage('')
-    handleDismissConfirmation()
   }
 
   const [innerLiquidityPercentage, setInnerLiquidityPercentage] = useDebouncedChangeHandler(
