@@ -3,6 +3,13 @@ import { AbstractConnector } from '@web3-react/abstract-connector'
 import { fortmatic, injected, portis, walletconnect, walletlink } from '../connectors'
 
 /**
+ * env.production
+ *
+ * REACT_APP_CHAIN_ID="1"
+ * REACT_APP_NETWORK_URL="https://mainnet.infura.io/v3/719c0a3ff5e84104a4d5900296f20f66"
+ */
+
+/**
  * > Mainnet
  *
  * Factory:

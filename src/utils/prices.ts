@@ -5,28 +5,28 @@ import { Field } from '../state/swap/actions'
 import { basisPointsToPercent } from './index'
 
 // liquidity providers commission
-const BASE_FEE = new Percent(JSBI.BigInt(25), JSBI.BigInt(10000)) // 0.25%
+const BASE_FEE = new Percent(JSBI.BigInt(28), JSBI.BigInt(10000)) // 0.28%
 const ONE_HUNDRED_PERCENT = new Percent(JSBI.BigInt(10000), JSBI.BigInt(10000))
 const INPUT_FRACTION_AFTER_BASE_FEE = ONE_HUNDRED_PERCENT.subtract(BASE_FEE)
-// service commission
-const SERVICE_FEE = new Percent(JSBI.BigInt(5), JSBI.BigInt(10000)) // 0.05%
-const INPUT_FRACTION_AFTER_SERVICE_FEE = ONE_HUNDRED_PERCENT.subtract(SERVICE_FEE)
+// protocol commission
+const PROTOCOL_FEE = new Percent(JSBI.BigInt(2), JSBI.BigInt(10000)) // 0.02%
+const INPUT_FRACTION_AFTER_PROTOCOL_FEE = ONE_HUNDRED_PERCENT.subtract(PROTOCOL_FEE)
 
 // computes price breakdown for the trade
 export function computeTradePriceBreakdown(
   trade?: Trade
-): { priceImpactWithoutFee?: Percent; realizedLPFee?: CurrencyAmount; realizedServiceFee?: CurrencyAmount } {
-  const realizedServiceFee = !trade
+): { priceImpactWithoutFee?: Percent; realizedLPFee?: CurrencyAmount; realizedProtocolFee?: CurrencyAmount } {
+  const realizedProtocolFee = !trade
     ? undefined
     : ONE_HUNDRED_PERCENT.subtract(
         trade.route.pairs.reduce<Fraction>(
-          (currentFee: Fraction): Fraction => currentFee.multiply(INPUT_FRACTION_AFTER_SERVICE_FEE),
+          (currentFee: Fraction): Fraction => currentFee.multiply(INPUT_FRACTION_AFTER_PROTOCOL_FEE),
           ONE_HUNDRED_PERCENT
         )
       )
 
   // for each hop in our trade, take away the x*y=k price impact from 0.25% fees
-  // e.g. for 3 tokens/2 hops: 1 - ((1 - 0.025) * (1 - 0.025))
+  // e.g. for 3 tokens/2 hops: 1 - ((1 - 0.028) * (1 - 0.028))
   const realizedLPFee = !trade
     ? undefined
     : ONE_HUNDRED_PERCENT.subtract(
@@ -44,12 +44,12 @@ export function computeTradePriceBreakdown(
     ? new Percent(priceImpactWithoutFeeFraction?.numerator, priceImpactWithoutFeeFraction?.denominator)
     : undefined
 
-  const realizedServiceFeeAmount =
-    realizedServiceFee &&
+  const realizedProtocolFeeAmount =
+    realizedProtocolFee &&
     trade &&
     (trade.inputAmount instanceof TokenAmount
-      ? new TokenAmount(trade.inputAmount.token, realizedServiceFee.multiply(trade.inputAmount.raw).quotient)
-      : CurrencyAmount.ether(realizedServiceFee.multiply(trade.inputAmount.raw).quotient))
+      ? new TokenAmount(trade.inputAmount.token, realizedProtocolFee.multiply(trade.inputAmount.raw).quotient)
+      : CurrencyAmount.ether(realizedProtocolFee.multiply(trade.inputAmount.raw).quotient))
 
   // the amount of the input that accrues to LPs
   const realizedLPFeeAmount =
@@ -61,7 +61,7 @@ export function computeTradePriceBreakdown(
 
   return {
     priceImpactWithoutFee: priceImpactWithoutFeePercent,
-    realizedServiceFee: realizedServiceFeeAmount,
+    realizedProtocolFee: realizedProtocolFeeAmount,
     realizedLPFee: realizedLPFeeAmount
   }
 }

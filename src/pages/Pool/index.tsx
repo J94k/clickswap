@@ -128,7 +128,7 @@ export default function Pool() {
               </RowBetween>
               <RowBetween>
                 <TYPE.body>
-                  {`Liquidity providers earn a 0.25% fee on all trades proportional to their share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity.`}
+                  {`Liquidity providers earn a 0.28% fee on all trades proportional to their share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity.`}
                 </TYPE.body>
               </RowBetween>
             </AutoColumn>
@@ -201,7 +201,7 @@ export default function Pool() {
 
             <AutoColumn justify={'center'} gap="md">
               <Text textAlign="center" fontSize={14} style={{ padding: '.5rem 0 .5rem 0' }}>
-                {hasV1Liquidity ? 'Uniswap V1 liquidity found!' : "Don't see a pool you joined?"}{' '}
+                {hasV1Liquidity ? 'Clickswap V1 liquidity found!' : "Don't see a pool you joined?"}{' '}
                 <StyledInternalLink id="import-pool-link" to={hasV1Liquidity ? '/migrate/v1' : '/find'}>
                   {hasV1Liquidity ? 'Migrate now.' : 'Import it.'}
                 </StyledInternalLink>

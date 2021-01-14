@@ -7,20 +7,20 @@ import useParsedQueryString from '../../hooks/useParsedQueryString'
 import useToggledVersion, { DEFAULT_VERSION, Version } from '../../hooks/useToggledVersion'
 
 import { StyledInternalLink } from '../../theme'
-import { YellowCard } from '../Card'
+import { LightCard } from '../Card'
 import { AutoColumn } from '../Column'
 
 function VersionLinkContainer({ children }: { children: React.ReactNode }) {
   const theme = useContext(ThemeContext)
 
   return (
-    <YellowCard style={{ marginTop: '12px', padding: '0.5rem 0.5rem' }}>
+    <LightCard style={{ marginTop: '12px', padding: '0.5rem 0.5rem' }}>
       <AutoColumn gap="sm" justify="center" style={{ alignItems: 'center', textAlign: 'center' }}>
         <Text lineHeight="145.23%;" fontSize={14} fontWeight={400} color={theme.text1}>
           {children}
         </Text>
       </AutoColumn>
-    </YellowCard>
+    </LightCard>
   )
 }
 
