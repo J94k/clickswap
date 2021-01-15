@@ -183,18 +183,10 @@ const StyledNavLink = styled(NavLink).attrs({
   font-weight: 500;
   transition: 0.3s ease;
 
+  :hover,
+  :focus,
   &.${activeClassName} {
-    font-weight: 600;
     color: ${({ theme }) => theme.text1};
-  }
-
-  :hover {
-    transform: translateY(0.2em);
-    color: ${({ theme }) => darken(0.1, theme.text1)};
-  }
-
-  :focus {
-    color: ${({ theme }) => darken(0.1, theme.text1)};
   }
 `
 

@@ -46,6 +46,13 @@
     },
     {
       "chainId": 1,
+      "address": "0x14a52cf6b4f68431bd5d9524e4fcd6f41ce4ade9",
+      "symbol": "SWAP",
+      "name": "Swaponline token",
+      "decimals": 18
+    },
+    {
+      "chainId": 1,
       "address": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
       "name": "Tether USD",
       "symbol": "USDT",

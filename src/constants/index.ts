@@ -34,7 +34,9 @@ import { fortmatic, injected, portis, walletconnect, walletlink } from '../conne
  */
 
 /**
- * > Ropsten (active)
+ * > Ropsten (prod)
+ * development not active
+ * production active
  *
  * Factory: 0xE5Cc9e83C93B6F7380fc8995B704427531979cFc
  * INIT_CODE_HASH: 0x573918fcf1ba8ba7ac89d5078a3f406808383096cd3739fc8bcb0c08475080c9
@@ -45,7 +47,21 @@ import { fortmatic, injected, portis, walletconnect, walletlink } from '../conne
  * Router: 0x334b2BBbF8f514bC49D607274671d4a6A9cd05D3
  */
 
-export const ROUTER_ADDRESS = '0x334b2BBbF8f514bC49D607274671d4a6A9cd05D3'
+/**
+ * > Ropsten:
+ * development active
+ * production not active
+ *
+ * Factory: 0x3bD0000275e9030CE87ba8860860b3268580d7d2
+ * INIT_CODE_HASH: 0xcb8c2f53707e37b01ea895d54c139e3fca328ff01663e0de209ae340a4208041
+ * feeToSetter: 0x57d49704F453CdD2b995280d9D7F557E42847d82
+ * feeTo: 0x10aA8C82e3656170baAE80D189b8b7DcEA6865C9
+ *
+ * WETH: 0xc778417e063141139fce010982780140aa0cd5ab
+ * Router: 0x775FE013194fa0486A468D2b0a3D6aEBa010A017
+ */
+
+export const ROUTER_ADDRESS = '0x775FE013194fa0486A468D2b0a3D6aEBa010A017'
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 
 // a list of tokens by chain

@@ -162,6 +162,12 @@ export default function RemoveLiquidity({
       .send('eth_signTypedData_v4', [account, data])
       .then(splitSignature)
       .then(signature => {
+        // console.log('Remove liquidity ***************')
+        // console.log('signature data: ', data)
+        // console.log('signature: ', signature)
+        // console.log('deadline: ', deadline)
+        // console.log('***************')
+
         setSignatureData({
           v: signature.v,
           r: signature.r,
