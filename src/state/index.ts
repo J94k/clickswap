@@ -1,8 +1,7 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 import { save, load } from 'redux-localstorage-simple'
-
-import application from './application/reducer'
 import { updateVersion } from './global/actions'
+import application from './application/reducer'
 import user from './user/reducer'
 import transactions from './transactions/reducer'
 import swap from './swap/reducer'
@@ -24,7 +23,10 @@ const store = configureStore({
     multicall,
     lists
   },
-  middleware: [...getDefaultMiddleware({ immutableCheck: false, thunk: false }), save({ states: PERSISTED_KEYS })],
+  middleware: [
+    ...getDefaultMiddleware({ immutableCheck: false, thunk: false, serializableCheck: false }),
+    save({ states: PERSISTED_KEYS })
+  ],
   preloadedState: load({ states: PERSISTED_KEYS })
 })
 
