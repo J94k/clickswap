@@ -9,10 +9,10 @@ import { useTotalSupply } from '../../data/TotalSupply'
 
 import { useActiveWeb3React } from '../../hooks'
 import { useTokenBalance } from '../../state/wallet/hooks'
-import { ExternalLink, TYPE, HideExtraSmall, ExtraSmallOnly } from '../../theme'
+import { TYPE, HideExtraSmall, ExtraSmallOnly } from '../../theme' // { ExternalLink }
 import { currencyId } from '../../utils/currencyId'
 import { unwrappedToken } from '../../utils/wrappedCurrency'
-import { ButtonPrimary, ButtonSecondary, ButtonEmpty, ButtonUNIGradient } from '../Button'
+import { ButtonPrimary, ButtonEmpty, ButtonUNIGradient } from '../Button' // { ButtonSecondary }
 import { CardNoise } from '../earn/styled'
 import { useColor } from '../../hooks/useColor'
 import Card, { GreyCard, LightCard } from '../Card'
@@ -294,14 +294,14 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
               </Text>
             </FixedHeightRow>
 
-            <ButtonSecondary padding="8px">
+            {/* <ButtonSecondary padding="8px">
               <ExternalLink
                 style={{ width: '100%', textAlign: 'center' }}
                 href={`https://info.clickswap.cloud/#/account/${account}`}
               >
                 View accrued fees and analytics<span style={{ fontSize: '12px' }}>↗</span>
               </ExternalLink>
-            </ButtonSecondary>
+            </ButtonSecondary> */}
             {userDefaultPoolBalance && JSBI.greaterThan(userDefaultPoolBalance.raw, BIG_INT_ZERO) && (
               <RowBetween marginTop="10px">
                 <ButtonPrimary

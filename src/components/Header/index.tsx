@@ -2,7 +2,7 @@ import { ChainId } from '@uniswap/sdk'
 import React from 'react'
 import { Text } from 'rebass'
 import { NavLink } from 'react-router-dom'
-import { darken } from 'polished'
+// import { darken } from 'polished'
 import { useTranslation } from 'react-i18next'
 
 import styled from 'styled-components'
@@ -145,7 +145,8 @@ const Title = styled.a`
   align-items: center;
   pointer-events: auto;
   justify-self: flex-start;
-  margin-right: 12px;
+  margin-right: 18px;
+
   ${({ theme }) => theme.mediaWidth.upToSmall`
     justify-self: center;
   `};
@@ -191,31 +192,31 @@ const StyledNavLink = styled(NavLink).attrs({
   }
 `
 
-const RedirectLink = styled.a`
-  ${({ theme }) => theme.flexRowNoWrap}
-  align-items: left;
-  outline: none;
-  cursor: pointer;
-  text-decoration: none;
-  white-space: nowrap;
-  color: ${({ theme }) => theme.text3};
-  font-size: 1.3rem;
-  width: fit-content;
-  margin: 0 12px;
-  font-weight: 500;
-  transition: 0.3s ease;
+// const RedirectLink = styled.a`
+//   ${({ theme }) => theme.flexRowNoWrap}
+//   align-items: left;
+//   outline: none;
+//   cursor: pointer;
+//   text-decoration: none;
+//   white-space: nowrap;
+//   color: ${({ theme }) => theme.text3};
+//   font-size: 1.3rem;
+//   width: fit-content;
+//   margin: 0 12px;
+//   font-weight: 500;
+//   transition: 0.3s ease;
 
-  &.${activeClassName} {
-    font-weight: 600;
-    color: ${({ theme }) => theme.text1};
-  }
+//   &.${activeClassName} {
+//     font-weight: 600;
+//     color: ${({ theme }) => theme.text1};
+//   }
 
-  :focus,
-  :hover {
-    text-decoration: underline;
-    color: ${({ theme }) => darken(0.1, theme.text1)};
-  }
-`
+//   :focus,
+//   :hover {
+//     text-decoration: underline;
+//     color: ${({ theme }) => darken(0.1, theme.text1)};
+//   }
+// `
 
 const NETWORK_LABELS: { [chainId in ChainId]?: string } = {
   [ChainId.RINKEBY]: 'Rinkeby',
@@ -257,9 +258,9 @@ export default function Header() {
             {t('pool')}
           </StyledNavLink>
 
-          <RedirectLink href={'https://info.clickswap.cloud/'} target="_blank">
+          {/* <RedirectLink href={'https://info.clickswap.cloud/'} target="_blank">
             {t('analytics')}
-          </RedirectLink>
+          </RedirectLink> */}
         </HeaderLinks>
       </HeaderRow>
 

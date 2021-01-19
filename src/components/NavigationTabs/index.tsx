@@ -43,33 +43,33 @@ const StyledNavLink = styled(NavLink).attrs({
   }
 `
 
-const RedirectLink = styled.a`
-  ${({ theme }) => theme.flexRowNoWrap}
-  align-items: left;
-  border-radius: 3rem;
-  outline: none;
-  cursor: pointer;
-  text-decoration: none;
-  color: ${({ theme }) => theme.text2};
-  font-size: 1.3rem;
-  width: fit-content;
-  margin: 0 12px;
-  font-weight: 500;
-  transition: transform 0.3s ease;
+// const RedirectLink = styled.a`
+//   ${({ theme }) => theme.flexRowNoWrap}
+//   align-items: left;
+//   border-radius: 3rem;
+//   outline: none;
+//   cursor: pointer;
+//   text-decoration: none;
+//   color: ${({ theme }) => theme.text2};
+//   font-size: 1.3rem;
+//   width: fit-content;
+//   margin: 0 12px;
+//   font-weight: 500;
+//   transition: transform 0.3s ease;
 
-  &.${activeClassName} {
-    font-weight: 600;
-    color: ${({ theme }) => theme.text1};
-  }
+//   &.${activeClassName} {
+//     font-weight: 600;
+//     color: ${({ theme }) => theme.text1};
+//   }
 
-  :hover {
-    transform: translateY(0.2em);
-    color: ${({ theme }) => darken(0.1, theme.text1)};
-  }
-  :focus {
-    color: ${({ theme }) => darken(0.1, theme.text1)};
-  }
-`
+//   :hover {
+//     transform: translateY(0.2em);
+//     color: ${({ theme }) => darken(0.1, theme.text1)};
+//   }
+//   :focus {
+//     color: ${({ theme }) => darken(0.1, theme.text1)};
+//   }
+// `
 
 const ActiveText = styled.div`
   font-weight: 500;
@@ -90,9 +90,9 @@ export function SwapPoolTabs({ active }: { active: 'swap' | 'pool' | 'analytics'
       <StyledNavLink id={`pool-nav-link`} to={'/pool'} isActive={() => active === 'pool'}>
         {t('pool')}
       </StyledNavLink>
-      <RedirectLink href={'https://info.clickswap.cloud/'} target="_blank">
+      {/* <RedirectLink href={'https://info.clickswap.cloud/'} target="_blank">
         {t('analytics')}
-      </RedirectLink>
+      </RedirectLink> */}
     </Tabs>
   )
 }
