@@ -27,6 +27,7 @@ const HeaderFrame = styled.div`
   position: relative;
   padding: 1rem 3rem;
   z-index: 2;
+
   ${({ theme }) => theme.mediaWidth.upToMedium`
     grid-template-columns: 1fr;
     padding: 0 1rem;
@@ -35,7 +36,7 @@ const HeaderFrame = styled.div`
   `};
 
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-        padding: 0.5rem 1rem;
+    padding: 0.5rem 1rem;
   `}
 `
 

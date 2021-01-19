@@ -24,11 +24,11 @@ const StyledRangeInput = styled.input<{ size: number }>`
     border: none;
     transform: translateY(-50%);
     color: ${({ theme }) => theme.bg1};
+    transition: 0.2s;
 
     &:hover,
     &:focus {
-      box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 16px 24px rgba(0, 0, 0, 0.06),
-        0px 24px 32px rgba(0, 0, 0, 0.04);
+      background-color: ${({ theme }) => theme.primary1};
     }
   }
 
@@ -39,11 +39,11 @@ const StyledRangeInput = styled.input<{ size: number }>`
     border-radius: 100%;
     border: none;
     color: ${({ theme }) => theme.bg1};
+    transition: 0.2s;
 
     &:hover,
     &:focus {
-      box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 16px 24px rgba(0, 0, 0, 0.06),
-        0px 24px 32px rgba(0, 0, 0, 0.04);
+      background-color: ${({ theme }) => theme.primary1};
     }
   }
 
@@ -53,21 +53,21 @@ const StyledRangeInput = styled.input<{ size: number }>`
     background-color: #565a69;
     border-radius: 100%;
     color: ${({ theme }) => theme.bg1};
+    transition: 0.2s;
 
     &:hover,
     &:focus {
-      box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 16px 24px rgba(0, 0, 0, 0.06),
-        0px 24px 32px rgba(0, 0, 0, 0.04);
+      background-color: ${({ theme }) => theme.primary1};
     }
   }
 
   &::-webkit-slider-runnable-track {
-    background: linear-gradient(90deg, ${({ theme }) => theme.bg5}, ${({ theme }) => theme.bg3});
+    background-color: ${({ theme }) => theme.bg5};
     height: 2px;
   }
 
   &::-moz-range-track {
-    background: linear-gradient(90deg, ${({ theme }) => theme.bg5}, ${({ theme }) => theme.bg3});
+    background-color: ${({ theme }) => theme.bg5};
     height: 2px;
   }
 

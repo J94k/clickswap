@@ -46,6 +46,7 @@ import { Field } from '../../state/burn/actions'
 import { useWalletModalToggle } from '../../state/application/hooks'
 import { useUserSlippageTolerance } from '../../state/user/hooks'
 import { BigNumber } from '@ethersproject/bignumber'
+import { useAllTransactions } from '../../state/transactions/hooks'
 
 export default function RemoveLiquidity({
   history,
@@ -129,7 +130,7 @@ export default function RemoveLiquidity({
       { name: 'verifyingContract', type: 'address' }
     ]
     const domain = {
-      name: 'Uniswap V2',
+      name: 'Uniswap', // the same as ERC20 contract's 'constant name'
       version: '1',
       chainId: chainId,
       verifyingContract: pair.liquidityToken.address
@@ -162,12 +163,6 @@ export default function RemoveLiquidity({
       .send('eth_signTypedData_v4', [account, data])
       .then(splitSignature)
       .then(signature => {
-        // console.log('Remove liquidity ***************')
-        // console.log('signature data: ', data)
-        // console.log('signature: ', signature)
-        // console.log('deadline: ', deadline)
-        // console.log('***************')
-
         setSignatureData({
           v: signature.v,
           r: signature.r,
@@ -277,8 +272,6 @@ export default function RemoveLiquidity({
           signatureData.r,
           signatureData.s
         ]
-        console.log('Remove liquidity: one currency is ETH ')
-        console.log('Method args: ', args)
       } else {
         methodNames = ['removeLiquidityWithPermit']
         args = [
@@ -294,8 +287,6 @@ export default function RemoveLiquidity({
           signatureData.r,
           signatureData.s
         ]
-        console.log('Remove liquidity: pair does not have ETH')
-        console.log('Method args: ', args)
       }
     } else {
       throw new Error('Attempting to confirm without approval or a signature. Please contact support.')
@@ -498,6 +489,12 @@ export default function RemoveLiquidity({
     liquidityPercentChangeCallback
   )
 
+  const allTransactions = useAllTransactions()
+  const pending = Object.values(allTransactions)
+    .filter(tx => !tx.receipt)
+    .map(tx => tx.hash)
+  const hasPendingTransactions = !!pending.length
+
   return (
     <>
       <AppBody>
@@ -689,12 +686,16 @@ export default function RemoveLiquidity({
                   <ButtonConfirmed
                     onClick={onAttemptToApprove}
                     confirmed={approval === ApprovalState.APPROVED || signatureData !== null}
-                    disabled={approval !== ApprovalState.NOT_APPROVED || signatureData !== null}
+                    disabled={
+                      hasPendingTransactions || approval !== ApprovalState.NOT_APPROVED || signatureData !== null
+                    }
                     mr="0.5rem"
                     fontWeight={500}
                     fontSize={16}
                   >
-                    {approval === ApprovalState.PENDING ? (
+                    {hasPendingTransactions ? (
+                      <Dots>Pending</Dots>
+                    ) : approval === ApprovalState.PENDING ? (
                       <Dots>Approving</Dots>
                     ) : approval === ApprovalState.APPROVED || signatureData !== null ? (
                       'Approved'
