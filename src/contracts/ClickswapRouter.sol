@@ -1,3 +1,7 @@
+/**
+ * compiler 0.6.6+commit.6c089d02
+*/
+
 pragma solidity =0.6.6;
 
 interface IUniswapV2Factory {
@@ -690,10 +694,10 @@ library UniswapV2Library {
     function pairFor(address factory, address tokenA, address tokenB) internal pure returns (address pair) {
         (address token0, address token1) = sortTokens(tokenA, tokenB);
         pair = address(uint(keccak256(abi.encodePacked(
-                 hex'ff',
+                hex'ff',
                 factory,
                 keccak256(abi.encodePacked(token0, token1)),
-                hex'cb8c2f53707e37b01ea895d54c139e3fca328ff01663e0de209ae340a4208041' // init code hash
+                hex'5fac5fc429b602141aad7f12a2c44404e1db616bcb25c91475c573fd5ff6bffe' // init code hash
             ))));
     }
 
