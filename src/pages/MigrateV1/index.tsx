@@ -52,7 +52,7 @@ export default function MigrateV1() {
   // * old version
   // const V1LiquidityTokens: Token[] = useMemo(() => {
   //   return chainId
-  //     ? Object.keys(V1Exchanges).map(exchangeAddress => new Token(chainId, exchangeAddress, 18, 'UNI-V1', 'Clickswap V1'))
+  //     ? Object.keys(V1Exchanges).map(exchangeAddress => new Token(chainId, exchangeAddress, 18, 'UNI-V1', 'Uniswap V1'))
   //     : []
   // }, [chainId, V1Exchanges])
   // const [V1LiquidityBalances, V1LiquidityBalancesLoading] = useTokenBalancesWithLoadingIndicator(
@@ -94,7 +94,7 @@ export default function MigrateV1() {
     }
 
     //@ts-ignore
-    const lpToken = new Token(chainId, pair.pair, 18, 'UNI-V2', 'Clickswap V2')
+    const lpToken = new Token(chainId, pair.pair, 18, 'UNI-V2', 'Uniswap V2')
     const token0 = allTokens[pair.token0] || token
     const token1 = allTokens[pair.token1] || token
     const bal = new TokenAmount(lpToken, pair.balance.toString())

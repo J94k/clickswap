@@ -12,7 +12,7 @@ import { fortmatic, injected, portis, walletconnect, walletlink } from '../conne
 /**
  * > Mainnet
  *
- * Factory:
+ * FACTORY_ADDRESS:
  * INIT_CODE_HASH:
  * feeToSetter: 0x57d49704F453CdD2b995280d9D7F557E42847d82
  * feeTo: 0x10aA8C82e3656170baAE80D189b8b7DcEA6865C9
