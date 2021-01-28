@@ -130,7 +130,7 @@ export default function RemoveLiquidity({
       { name: 'verifyingContract', type: 'address' }
     ]
     const domain = {
-      name: 'Uniswap V2', // the same as ERC20 contract's 'constant name'
+      name: 'Clickswap LP', // the same as ERC20 contract's 'name'
       version: '1',
       chainId: chainId,
       verifyingContract: pair.liquidityToken.address

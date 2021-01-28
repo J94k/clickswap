@@ -41,37 +41,8 @@ export default function MigrateV1() {
     }
   }, [token, isOnSelectedList, addToken, allTokens])
 
-  // * old version
-  // get V1 LP balances
-  // const V1Exchanges = useAllTokenV1Exchanges()
-
   // get UniswapV2 pairs with balances
-  //@ts-ignore
-  const [uniswapV2Pairs, pairLoading] = useAllUniswapV2Pairs(account)
-
-  // * old version
-  // const V1LiquidityTokens: Token[] = useMemo(() => {
-  //   return chainId
-  //     ? Object.keys(V1Exchanges).map(exchangeAddress => new Token(chainId, exchangeAddress, 18, 'UNI-V1', 'Uniswap V1'))
-  //     : []
-  // }, [chainId, V1Exchanges])
-  // const [V1LiquidityBalances, V1LiquidityBalancesLoading] = useTokenBalancesWithLoadingIndicator(
-  //   account ?? undefined,
-  //   V1LiquidityTokens
-  // )
-  // const allV1PairsWithLiquidity = V1LiquidityTokens.filter(V1LiquidityToken => {
-  //   const balance = V1LiquidityBalances?.[V1LiquidityToken.address]
-  //   return balance && JSBI.greaterThan(balance.raw, JSBI.BigInt(0))
-  // }).map(V1LiquidityToken => {
-  //   const balance = V1LiquidityBalances[V1LiquidityToken.address]
-  //   return balance ? (
-  //     <V1PositionCard
-  //       key={V1LiquidityToken.address}
-  //       token={V1Exchanges[V1LiquidityToken.address]}
-  //       V1LiquidityBalance={balance}
-  //     />
-  //   ) : null
-  // })
+  const [uniswapV2Pairs, pairLoading] = useAllUniswapV2Pairs(account!)
 
   const allUniV2WithLiquidity = []
   for (let i = 0; i < uniswapV2Pairs.length; i++) {
@@ -93,19 +64,15 @@ export default function MigrateV1() {
       }
     }
 
-    //@ts-ignore
-    const lpToken = new Token(chainId, pair.pair, 18, 'UNI-V2', 'Uniswap V2')
+    const lpToken = new Token(chainId!, pair.pair, 18, 'UNI-V2', 'Uniswap V2')
     const token0 = allTokens[pair.token0] || token
     const token1 = allTokens[pair.token1] || token
     const bal = new TokenAmount(lpToken, pair.balance.toString())
     //@ts-ignore
     const card = <UniV2PositionCard key={pair.pair} token0={token0} token1={token1} V1LiquidityBalance={bal} />
+
     allUniV2WithLiquidity.push(card)
   }
-
-  // * old version
-  // should never always be false, because a V1 exhchange exists for WETH on all testnets
-  // const isLoading = Object.keys(V1Exchanges)?.length === 0 || V1LiquidityBalancesLoading
 
   const isLoading = uniswapV2Pairs?.length === 0 || pairLoading
 
