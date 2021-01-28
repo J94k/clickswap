@@ -105,7 +105,7 @@ export default function SwapModalFooter({
             <TYPE.black fontSize={14} fontWeight={400} color={theme.text2}>
               Protocol fee
             </TYPE.black>
-            <QuestionHelper text="Protocol commission in the amount of (0.02%)." />
+            <QuestionHelper text="Protocol commission in the amount of (0.03%)." />
           </RowFixed>
           <TYPE.black fontSize={14}>
             {realizedProtocolFee ? `${realizedProtocolFee.toSignificant(4)} ${trade.inputAmount.currency.symbol}` : '-'}
@@ -117,7 +117,7 @@ export default function SwapModalFooter({
             <TYPE.black fontSize={14} fontWeight={400} color={theme.text2}>
               Liquidity Provider Fee
             </TYPE.black>
-            <QuestionHelper text="A portion of each trade (0.28%) goes to liquidity providers as a protocol incentive." />
+            <QuestionHelper text="A portion of each trade (0.27%) goes to liquidity providers as a protocol incentive." />
           </RowFixed>
           <TYPE.black fontSize={14}>
             {realizedLPFee ? realizedLPFee?.toSignificant(6) + ' ' + trade.inputAmount.currency.symbol : '-'}

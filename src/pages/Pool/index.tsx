@@ -128,7 +128,7 @@ export default function Pool() {
               </RowBetween>
               <RowBetween>
                 <TYPE.body>
-                  {`Liquidity providers earn a 0.28% fee on all trades proportional to their share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity.`}
+                  {`Liquidity providers earn a 0.27% fee on all trades proportional to their share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity.`}
                 </TYPE.body>
               </RowBetween>
             </AutoColumn>

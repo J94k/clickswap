@@ -10,28 +10,28 @@ import { fortmatic, injected, portis, walletconnect, walletlink } from '../conne
  */
 
 /**
- * > Mainnet
- *
+ * * Mainnet
  * FACTORY_ADDRESS:
  * INIT_CODE_HASH:
- * feeToSetter: 0x57d49704F453CdD2b995280d9D7F557E42847d82
- * feeTo: 0x10aA8C82e3656170baAE80D189b8b7DcEA6865C9
- *
+ * feeTo: 0x843E3a344DFc239D939E8D1dA22F021f529a5D45
  * WETH: 0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2
- * Router:
+ * ROUTER_ADDRESS:
  */
 
 /**
- * Ropsten:
- * development: active
- * production: active
- *
+ * * Ropsten:
+ * FACTORY_ADDRESS:
+ * INIT_CODE_HASH:
+ * feeTo: 0x843E3a344DFc239D939E8D1dA22F021f529a5D45
+ * WETH: 0xc778417e063141139fce010982780140aa0cd5ab
+ * ROUTER_ADDRESS:
+ */
+
+/**
+ * Ropsten (old):
  * FACTORY_ADDRESS: 0x5DE6F3517F2b92042Ad78dc98d6dcB2D7b9F17dB
  * INIT_CODE_HASH: 0x5fac5fc429b602141aad7f12a2c44404e1db616bcb25c91475c573fd5ff6bffe
- *
- * feeToSetter: 0x57d49704F453CdD2b995280d9D7F557E42847d82
  * feeTo: 0x10aA8C82e3656170baAE80D189b8b7DcEA6865C9
- *
  * WETH: 0xc778417e063141139fce010982780140aa0cd5ab
  * ROUTER_ADDRESS: 0xcaB08DC5200a7aC2E7Ad7e6661Bc5c023e40f2c8
  */
