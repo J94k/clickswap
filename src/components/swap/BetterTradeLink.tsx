@@ -4,7 +4,7 @@ import { useLocation } from 'react-router'
 import { Text } from 'rebass'
 import { ThemeContext } from 'styled-components'
 import useParsedQueryString from '../../hooks/useParsedQueryString'
-import useToggledVersion, { DEFAULT_VERSION, Version } from '../../hooks/useToggledVersion'
+import useToggledVersion, { DEFAULT_VERSION } from '../../hooks/useToggledVersion'
 
 import { StyledInternalLink } from '../../theme'
 import { LightCard } from '../Card'
@@ -21,30 +21,6 @@ function VersionLinkContainer({ children }: { children: React.ReactNode }) {
         </Text>
       </AutoColumn>
     </LightCard>
-  )
-}
-
-export default function BetterTradeLink({ version }: { version: Version }) {
-  const location = useLocation()
-  const search = useParsedQueryString()
-
-  const linkDestination = useMemo(() => {
-    return {
-      ...location,
-      search: `?${stringify({
-        ...search,
-        use: version !== DEFAULT_VERSION ? version : undefined
-      })}`
-    }
-  }, [location, search, version])
-
-  return (
-    <VersionLinkContainer>
-      There is a better price for this trade on{' '}
-      <StyledInternalLink to={linkDestination}>
-        <b>Clickswap {version.toUpperCase()} ↗</b>
-      </StyledInternalLink>
-    </VersionLinkContainer>
   )
 }
 
