@@ -10,7 +10,10 @@ import { ThemeContext } from 'styled-components'
 import { ButtonError, ButtonLight, ButtonPrimary } from '../../components/Button'
 import { LightCard } from '../../components/Card'
 import { AutoColumn, ColumnCenter } from '../../components/Column'
-import TransactionConfirmationModal, { ConfirmationModalContent } from '../../components/TransactionConfirmationModal'
+import TransactionConfirmationModal, {
+  ConfirmationModalContent,
+  TransactionErrorContent
+} from '../../components/TransactionConfirmationModal'
 import CurrencyInputPanel from '../../components/CurrencyInputPanel'
 import { AddRemoveTabs } from '../../components/NavigationTabs'
 import { MinimalPositionCard } from '../../components/PositionCard'
@@ -81,6 +84,8 @@ export default function AddLiquidity({
 
   // modal and loading
   const [showConfirm, setShowConfirm] = useState<boolean>(false)
+  const [showError, setShowError] = useState<boolean>(false)
+  const [errorMessage, setErrorMessage] = useState<string>('')
   const [attemptingTxn, setAttemptingTxn] = useState<boolean>(false) // clicked confirm
 
   // txn values
@@ -200,7 +205,10 @@ export default function AddLiquidity({
         })
       )
       .catch(error => {
+        setErrorMessage(error.message)
         setAttemptingTxn(false)
+        setShowError(true)
+        handleDismissConfirmation()
         // we only care if the error is something _other_ than the user rejected the tx
         if (error?.code !== 4001) {
           console.error(error)
@@ -292,6 +300,11 @@ export default function AddLiquidity({
     setTxHash('')
   }, [onFieldAInput, txHash])
 
+  const handleErrorConfirmation = () => {
+    setShowError(false)
+    setErrorMessage('')
+  }
+
   const isCreate = history.location.pathname.includes('/create')
 
   return (
@@ -303,7 +316,7 @@ export default function AddLiquidity({
             isOpen={showConfirm}
             onDismiss={handleDismissConfirmation}
             attemptingTxn={attemptingTxn}
-            hash={txHash}
+            hash={txHash ? txHash : ''}
             content={() => (
               <ConfirmationModalContent
                 title={noLiquidity ? 'You are creating a pool' : 'You will receive'}
@@ -312,6 +325,14 @@ export default function AddLiquidity({
                 bottomContent={modalBottom}
               />
             )}
+            pendingText={pendingText}
+          />
+          <TransactionConfirmationModal
+            isOpen={showError}
+            onDismiss={handleErrorConfirmation}
+            attemptingTxn={attemptingTxn}
+            hash={txHash ? txHash : ''}
+            content={() => <TransactionErrorContent onDismiss={handleErrorConfirmation} message={errorMessage} />}
             pendingText={pendingText}
           />
           <AutoColumn gap="20px">
