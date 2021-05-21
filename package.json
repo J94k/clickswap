@@ -1,6 +1,6 @@
 {
   "name": "clickswap",
-  "description": "ClickSwap Interface",
+  "description": "ClickSwap",
   "homepage": "https://clickswap.cloud",
   "private": true,
   "devDependencies": {
