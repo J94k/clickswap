@@ -4,23 +4,23 @@
 [![Tests](https://github.com/Uniswap/uniswap-interface/workflows/Tests/badge.svg)](https://github.com/Uniswap/uniswap-interface/actions?query=workflow%3ATests)
 [![Styled With Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://prettier.io/)
 
-## Development (Ropsten)
+## [Development on Ropsten](https://noteternal.github.io/clickswap/)
 
 ### Install Dependencies
 
 ```bash
-yarn
+npm install
 ```
 
 ### Run
 
 ```bash
-yarn start
+npm start
 ```
 
 ### Configuring the environment (optional)
 
-> You can use [Infura](https://infura.io/) service
+> You can use the [Infura service](https://infura.io/)
 
 To have the interface default to a different network when a wallet is not connected:
 
