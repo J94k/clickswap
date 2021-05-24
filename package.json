@@ -24,7 +24,7 @@
     "@types/react-window": "1.8.2",
     "@types/rebass": "4.0.6",
     "@types/styled-components": "5.1.1",
-    "@types/testing-library__cypress": "5.0.6",
+    "@types/testing-library__cypress": "5.0.8",
     "@types/wcag-contrast": "3.0.0",
     "@typescript-eslint/eslint-plugin": "2.34.0",
     "@typescript-eslint/parser": "2.34.0",
