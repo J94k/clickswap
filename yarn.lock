@@ -2444,10 +2444,10 @@
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.161.tgz"
   integrity sha512-EP6O3Jkr7bXvZZSZYlsgt5DIjiGr0dXP1/jVEwVLTFgg0d+3lWVQkRavYVQszV7dYUwvg0B8R0MBDpcmXg7XIA==
 
-"@types/luxon@1.24.4":
-  version "1.24.4"
-  resolved "https://registry.yarnpkg.com/@types/luxon/-/luxon-1.24.4.tgz#5dbd050b89247dbccab6eaa7744874c1fb7cea85"
-  integrity sha512-ce+P0b4rVq3LNXdD5r7eDqX2ydz2BonmTgVrHrV5yxsNKTt3YpnT5QDrid7xMAThhE/gg1RLAbxqbW1OCdiZog==
+"@types/luxon@1.26.5":
+  version "1.26.5"
+  resolved "https://registry.yarnpkg.com/@types/luxon/-/luxon-1.26.5.tgz#843fb705e16e4d2a90847a351b799ea9d879859e"
+  integrity sha512-XeQxxRMyJi1znfzHw4CGDLyup/raj84SnjjkI2fDootZPGlB0yqtvlvEIAmzHDa5wiEI5JJevZOWxpcofsaV+A==
 
 "@types/minimatch@*":
   version "3.0.3"
@@ -10409,10 +10409,10 @@ ltgt@~2.2.0:
   resolved "https://registry.yarnpkg.com/ltgt/-/ltgt-2.2.1.tgz"
   integrity sha1-81ypHEk/e3PaDgdJUwTxezH4fuU=
 
-luxon@1.25.0:
-  version "1.25.0"
-  resolved "https://registry.yarnpkg.com/luxon/-/luxon-1.25.0.tgz#d86219e90bc0102c0eb299d65b2f5e95efe1fe72"
-  integrity sha512-hEgLurSH8kQRjY6i4YLey+mcKVAWXbDNlZRmM6AgWDJ1cY3atl8Ztf5wEY7VBReFbmGnwQPz7KYJblL8B2k0jQ==
+luxon@1.27.0:
+  version "1.27.0"
+  resolved "https://registry.yarnpkg.com/luxon/-/luxon-1.27.0.tgz#ae10c69113d85dab8f15f5e8390d0cbeddf4f00f"
+  integrity sha512-VKsFsPggTA0DvnxtJdiExAucKdAnwbCCNlMM5ENvHlxubqWd0xhZcdb4XgZ7QFNhaRhilXCFxHuoObP5BNA4PA==
 
 make-dir@^2.0.0, make-dir@^2.1.0:
   version "2.1.0"
