@@ -8720,10 +8720,10 @@ inquirer@^7.0.0:
     strip-ansi "^6.0.0"
     through "^2.3.6"
 
-inter-ui@3.13.1:
-  version "3.13.1"
-  resolved "https://registry.yarnpkg.com/inter-ui/-/inter-ui-3.13.1.tgz#3b3841c1ab425035d0146b38c7ee7a640d3da3d8"
-  integrity sha512-A+gHBm9WXZZmIYHdQci9ZoIrsPkzwYvWqG2+DyrwOuxjZVnRyz3b73ridPUWI/JvZ1nGf2j0VdJ+vxh0/bKBwg==
+inter-ui@3.18.1:
+  version "3.18.1"
+  resolved "https://registry.yarnpkg.com/inter-ui/-/inter-ui-3.18.1.tgz#32d2676e4b03db08adc597e5c4bd89012f4e2351"
+  integrity sha512-W3LnAirp6a1ixpAHZwr9gH52KlOQOAp0oqbmIoGi2dAIlcIB7auJgLr9XFHUzYy2FoZ0Nf7aPe/nHMZB4/Zvdg==
 
 internal-ip@^4.3.0:
   version "4.3.0"
