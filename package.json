@@ -82,7 +82,7 @@
     "rebass": "4.0.7",
     "redux-localstorage-simple": "2.3.1",
     "serve": "11.3.2",
-    "start-server-and-test": "1.11.2",
+    "start-server-and-test": "1.12.3",
     "styled-components": "4.4.1",
     "typescript": "3.9.9",
     "use-count-up": "2.2.5",
