@@ -9,7 +9,7 @@
     "@popperjs/core": "2.9.2",
     "@reach/dialog": "0.10.5",
     "@reach/portal": "0.10.5",
-    "@reduxjs/toolkit": "1.4.0",
+    "@reduxjs/toolkit": "1.5.1",
     "@types/jest": "25.2.3",
     "@types/lodash.flatmap": "4.5.6",
     "@types/multicodec": "1.0.0",
