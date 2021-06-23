@@ -13,7 +13,7 @@
     "@types/jest": "26.0.23",
     "@types/lodash.flatmap": "4.5.6",
     "@types/multicodec": "1.0.0",
-    "@types/node": "13.13.15",
+    "@types/node": "14.17.4",
     "@types/qs": "6.9.6",
     "@types/react": "17.0.9",
     "@types/react-dom": "17.0.6",
