@@ -38,7 +38,7 @@
     "@ethersproject/solidity": "^5.0.0-beta"
   },
   "devDependencies": {
-    "@ethersproject/address": "5.2.0",
+    "@ethersproject/address": "5.4.0",
     "@ethersproject/contracts": "5.2.0",
     "@ethersproject/networks": "5.2.0",
     "@ethersproject/providers": "5.2.0",
